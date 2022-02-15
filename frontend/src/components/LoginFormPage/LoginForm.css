@@ -5,52 +5,136 @@
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    color: #8e8e8e;
 }
 
-
+#login-form {
+    margin-left: 30px;
+    padding-top: 20px;
+}
 
 #login-div > img {
     width: 100%;
 }
 
-
-#login-div > form > img {
-    width: 60%;
-    margin-top: 5px;
-    margin-bottom: -5px;
-}
-
-
-
-#login-div > form {
+#login-form > form {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
     border-radius: 1px;
+    padding-bottom: 30px;
 }
 
-#login-div > form > input {
+#login-form > form > img {
+    width: 60%;
+    margin-top: 5px;
+    margin-bottom: -5px;
+}
+
+#login-form > form > input {
     width: 70%;
     height: 20px;
     margin-bottom: 5px;
     padding: 10px;
     background-color: #FAFAFA;
-    border: 1px solid;
+    border: 1px solid rgba(var(--b6a,219,219,219),1);
     outline: none;
 }
-
-#login-div > form > button {
+#login-form > form > button {
     width: 75.7%;
     height: 30px;
     border: none;
     margin-top: 5px;
-    background-color: rgb(46, 159, 251);
+    background-color: rgba(46, 159, 251, 0.39);
+    cursor: default;
     color: white;
     font-weight: bold;
 }
 
-.active-button {
+#login-form > form > button.active-button {
     background-color: rgb(46, 159, 251);
+    cursor: pointer;
+}
+
+#login-form > form > div {
+    display: flex;
+    align-items: center;
+}
+#login-form > form > div > p {
+    display: flex;
+    font-weight: 600;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#login-form > form > div > span {
+    width: 120px;
+    height: 1px;
+    background-color: rgba(var(--b6a,219,219,219),1);
+}
+#login-form > form > a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #385185;
+}
+
+#no-account {
+    background-color: white;
+    border: 1px solid rgba(var(--b6a,219,219,219),1);
+    padding: 20px;
+    margin-top: 10px;
+    text-align: center;
+    color: #262626;
+}
+
+#no-account > a {
+    color: #0095f6;
+    font-weight: 600;
+}
+
+#login-form > p {
+    text-align: center;
+    font-weight: 500;
+    color: #262626;
+}
+
+#connect {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    height: 40px;
+    margin: auto;
+}
+
+#connect > a {
+    background-color: black;
+    color: white;
+    width: 95%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0;
+    text-align: left;
+}
+
+#connect > a > i {
+    font-size: 30px;
+    margin-right: px;
+}
+
+#connect > a > span > h6 {
+    margin-top: 14px;
+    margin-bottom: -3px;
+    font-weight: 300;
+}
+
+#connect > a > span > p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#login-div > #login-form > form > ul {
+    color: #ED4956;
 }
