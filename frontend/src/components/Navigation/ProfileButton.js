@@ -30,16 +30,20 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <i className="fas fa-home"></i>
+      <i className="far fa-comment-dots"></i>
+      <i className="far fa-plus-square"></i>
+      <i className="far fa-compass"></i>
+      <i className="far fa-heart"></i>
+      <button id='user-button' onClick={openMenu}>
+        <img src={'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg'}></img>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
+          <li><i className="far fa-user-circle"></i><p>Profile</p></li>
+          <li><i className="far fa-bookmark"></i><p>Profile</p></li>
+          <li><i className="fas fa-cog"></i><p>Profile</p></li>
+          <li><button onClick={logout}><p>Logout</p></button></li>
         </ul>
       )}
     </>

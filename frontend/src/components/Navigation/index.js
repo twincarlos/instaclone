@@ -23,7 +23,6 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <>
-        <input type='text' placeholder='Search'></input>
         <NavLink id='demo' onClick={() => handleDemo()} to="/">Demo</NavLink>
         <NavLink id='a-login' to="/login">Log In</NavLink>
         <NavLink id='a-signup' to="/signup">Sign Up</NavLink>
@@ -35,6 +34,7 @@ function Navigation({ isLoaded }){
     <ul id='navbar'>
       <li>
         <NavLink id='logo-home' exact to="/"><img src={logo} alt=''></img></NavLink>
+        <input type='text' placeholder='Search'></input>
         {isLoaded && sessionLinks}
       </li>
     </ul>
