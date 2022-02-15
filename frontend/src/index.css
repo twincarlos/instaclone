@@ -6,6 +6,7 @@ body {
 * {
     /* 300, 400, 500, 600 */
     font-family: proxima-nova, sans-serif;
+    color: #262626;
 }
 
 a {
@@ -22,4 +23,9 @@ ul > li {
 
 button {
     cursor: pointer;
+}
+
+b {
+    font-weight: 600;
+    color: #8E8E8E;
 }

@@ -5,7 +5,6 @@
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    color: #8e8e8e;
 }
 
 #login-form {
@@ -51,6 +50,7 @@
     cursor: default;
     color: white;
     font-weight: bold;
+    font-size: 15px;
 }
 
 #login-form > form > button.active-button {
@@ -67,15 +67,22 @@
     font-weight: 600;
     margin-left: 20px;
     margin-right: 20px;
+    color: #8e8e8e;
 }
+
 #login-form > form > div > span {
     width: 120px;
     height: 1px;
     background-color: rgba(var(--b6a,219,219,219),1);
 }
+
 #login-form > form > a {
     font-weight: 600;
     text-decoration: none;
+    color: #385185;
+}
+
+#login-form > form > a > i {
     color: #385185;
 }
 
@@ -109,7 +116,6 @@
 
 #connect > a {
     background-color: black;
-    color: white;
     width: 95%;
     border-radius: 5px;
     display: flex;
@@ -122,19 +128,22 @@
 #connect > a > i {
     font-size: 30px;
     margin-right: px;
+    color: white;
 }
 
 #connect > a > span > h6 {
     margin-top: 14px;
     margin-bottom: -3px;
     font-weight: 300;
+    color: white;
 }
 
 #connect > a > span > p {
     font-size: 20px;
     font-weight: 600;
+    color: white;
 }
 
-#login-div > #login-form > form > ul {
+#login-div > #login-form > form > ul > li {
     color: #ED4956;
 }

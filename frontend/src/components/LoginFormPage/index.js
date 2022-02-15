@@ -37,6 +37,15 @@ function LoginFormPage() {
       });
   }
 
+  const handleDemo = () => {
+    setErrors([]);
+    return dispatch(sessionActions.login({ credential: 'demo@user.io', password: 'password' }))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
+  }
+
   return (
     <div id='login-div'>
       <img src={iphone} alt=''></img>
@@ -46,27 +55,23 @@ function LoginFormPage() {
           <ul>
             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
-            <input
-              type="text"
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
-              placeholder='Username or email'
-              required
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder='Password'
-              required
-            />
+          <input
+            type="text"
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
+            placeholder='Username or email'
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Password'
+            required
+          />
           <button type="submit" disabled={!activeButton} className={activeButton ? 'active-button' : null}>Log In</button>
           <div><span /><p>OR</p><span /></div>
-          <NavLink to='/' onClick={() => {
-            setCredential('demo@user.io');
-            setPassword('password');
-            handleSubmit();
-          }}><i className="fas fa-user"></i> Login as Demo</NavLink>
+          <NavLink to='/' onClick={() => handleDemo()}><i className="fas fa-user"></i> Login as Demo</NavLink>
         </form>
         <div id='no-account'>
           Don't have an account? <NavLink to='/signup'>Sign up</NavLink>
@@ -82,10 +87,10 @@ function LoginFormPage() {
           </a>
           <a target="_blank" rel="noreferrer" href='https://www.linkedin.com/in/carlos-rodriguez-a9a7b2214/'>
             <i className="fab fa-linkedin-in"></i>
-              <span>
-                <h6>on LinkedIn</h6>
-                <p>Carlos R.</p>
-              </span>
+            <span>
+              <h6>on LinkedIn</h6>
+              <p>Carlos R.</p>
+            </span>
           </a>
         </div>
       </div>
