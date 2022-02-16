@@ -141,13 +141,13 @@
     width: 215px;
 }
 
-.profile-dropdown > li {
+.profile-dropdown > li, .profile-dropdown > a {
     display: flex;
     height: 40px;
     cursor: pointer;
 }
 
-.profile-dropdown > li:hover {
+.profile-dropdown > li:hover, .profile-dropdown > a:hover {
    background-color: #fafafa;
 }
 
@@ -157,13 +157,23 @@
     margin-left: 15px;
 }
 
+.profile-dropdown > a > i {
+    margin-top: 10px;
+    font-size: 18px;
+    margin-left: -25px;
+}
+
 .profile-dropdown > li > p {
     margin-left: 15px;
     margin-top: 6px;
 }
 
+.profile-dropdown > a > p {
+    margin-left: 16px;
+    margin-top: 6px;
+}
+
 .fa-bookmark {
-    left: 2px;
     margin-right: 5px;
 }
 
