@@ -2,7 +2,8 @@
 
 #user-header {
     position: relative;
-    margin: 100px 970px;
+    margin: 0 auto;
+    margin-top: 100px;
 
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -15,6 +16,7 @@
 #user-header > img {
     width: 170px;
     border-radius: 50%;
+    margin-left: -40px;
 }
 
 /* RIGHT */
@@ -22,6 +24,7 @@
 #user-header > div {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
+    margin-left: -43px;
 }
 
 /* RIGHT TOP */
@@ -34,25 +37,31 @@
 }
 
 #user-header-top > h1 {
-    font-weight: 400;
+    font-weight: 300;
     margin-right: 20px;
 }
 
-#user-header-top > button {
+#user-header-top > span > button {
+    position: relative;
+    bottom: 4px;
     font-size: 16px;
     font-weight: 600;
     height: 35px;
-    background-color: white;
     padding: 5px 9px;
     border-radius: 4px;
     margin-top: 30px;
     margin-right: 20px;
 }
 
-#user-header-top > i {
+#user-header-top > span > i {
     font-size: 25px;
     cursor: pointer;
     margin-top: 35px;
+}
+
+.not-my-profile > button {
+    background-color: #0095F6;
+    color: white;
 }
 
 /* RIGHT MIDDLE */
