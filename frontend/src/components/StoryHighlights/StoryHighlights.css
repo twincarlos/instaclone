@@ -1,0 +1,32 @@
+#stories-container {
+    display: flex;
+    width: 935px;
+    height: 130px;
+
+    position: relative;
+    margin: 0 auto;
+    margin-top: 40px;
+    right: 40px;
+}
+
+.story-widget {
+    width: 125px;
+    height: 130px;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.story-widget > div {
+    width: 85px;
+    height: 85px;
+    border: 1px solid #909090;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.story-widget > div > img {
+    width: 77px;
+    height: 77px;
+    margin-top: 3.5px;
+    border-radius: 50%;
+}
