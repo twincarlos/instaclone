@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import StoryHighlights from '../StoryHighlights';
 
@@ -42,6 +42,12 @@ function UserPage () {
                 </div>
             </div>
             <StoryHighlights />
+            <ul id='gallery-ul'>
+                <NavLink to={`/users/${userId}`} className='selected'><i className="fas fa-border-all"></i> POSTS</NavLink>
+                <NavLink to={`/users/${userId}`}><i className="fas fa-video"></i> REELS</NavLink>
+                <NavLink to={`/users/${userId}`}><i className="far fa-play-circle"></i> VIDEOS</NavLink>
+                <NavLink to={`/users/${userId}`}><i className="fas fa-user-tag"></i> TAGGED</NavLink>
+            </ul>
         </div>
     );
 }
