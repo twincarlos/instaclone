@@ -1,0 +1,102 @@
+/* MAIN */
+
+#user-header {
+    position: relative;
+    margin: 100px 970px;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    width: 800px;
+}
+
+/* LEFT */
+
+#user-header > img {
+    width: 170px;
+    border-radius: 50%;
+}
+
+/* RIGHT */
+
+#user-header > div {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+/* RIGHT TOP */
+
+#user-header-top {
+    display: flex;
+    width: 500px;
+    margin-left: 15px;
+    margin-top: -20px;
+}
+
+#user-header-top > h1 {
+    font-weight: 400;
+    margin-right: 20px;
+}
+
+#user-header-top > button {
+    font-size: 16px;
+    font-weight: 600;
+    height: 35px;
+    background-color: white;
+    padding: 5px 9px;
+    border-radius: 4px;
+    margin-top: 30px;
+    margin-right: 20px;
+}
+
+#user-header-top > i {
+    font-size: 25px;
+    cursor: pointer;
+    margin-top: 35px;
+}
+
+/* RIGHT MIDDLE */
+
+#user-header-middle {
+    display: flex;
+    margin-left: 17px;
+    margin-top: -17px;
+}
+
+#user-header-middle > p {
+    font-size: 19px;
+    font-weight: 500;
+    margin-right: 40px;
+}
+
+#user-header-middle > p > b {
+    color: #262626;
+}
+
+/* RIGHT BOTTOM */
+
+#user-header-bottom {
+    margin-top: -38px;
+    margin-left: 17px;
+}
+
+#user-header-bottom > p {
+    font-size: 19px;
+    margin-bottom: -5px;
+}
+
+#user-header-bottom > p > b {
+    color: #262626;
+}
+
+#user-header-bottom > a {
+    font-weight: 600;
+    font-size: 19px;
+    color: #00376b;
+}
+
+#user-header-bottom > #followed-by {
+    color: #8E8E8E;
+    font-weight: 500;
+    font-size: 14px;
+}
