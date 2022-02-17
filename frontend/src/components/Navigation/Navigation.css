@@ -50,16 +50,15 @@
 #demo {
     position: relative;
     left: 240px;
-    top: 25px;
+    top: 28px;
 
     background-color: #0095F6;
     color: white;
-    padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 5px;
     font-weight: 600;
-    height: 25px;
+    height: 30px;
 }
 
 #a-login {
@@ -103,7 +102,7 @@
     border-radius: 50%;
 }
 
-.fa-home, .fa-comment-dots, .fa-plus-square, .fa-compass, .fa-heart {
+.fa-home, .fa-comment-dots, .fa-plus-square, .fa-compass, .nav-heart {
     position: relative;
     top: 30px;
     font-size: 30px;
@@ -126,7 +125,7 @@
     left: 160px;
 }
 
-.fa-heart {
+.nav-heart {
     left: 180px;
 }
 

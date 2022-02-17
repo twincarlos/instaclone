@@ -6,7 +6,6 @@
     position: relative;
     margin: 0 auto;
     margin-top: 40px;
-    right: 40px;
 }
 
 .story-widget {
@@ -14,6 +13,7 @@
     height: 130px;
     padding: 10px 15px;
     text-align: center;
+    cursor: pointer;
 }
 
 .story-widget > div {

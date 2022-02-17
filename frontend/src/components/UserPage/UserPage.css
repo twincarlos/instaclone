@@ -61,7 +61,7 @@
     margin-top: 35px;
 }
 
-.not-my-profile > button {
+div > #user-header > div > #user-header-top > span > button.not-my-profile {
     background-color: #0095F6;
     color: white;
 }
@@ -115,12 +115,11 @@
 /* GALLERY UL */
 
 #gallery-ul {
-    width: 935px;
+    width: 1000px;
     height: 53px;
 
     position: relative;
     margin: 65px auto;
-    left: -30px;
 
     border-top: 1px solid #dbdbdb;
 
