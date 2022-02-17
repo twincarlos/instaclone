@@ -41,7 +41,8 @@
     border: 1px solid rgba(var(--b6a,219,219,219),1);
     outline: none;
 }
-#login-form > form > button {
+
+#login-form > form > button#login-button {
     width: 75.7%;
     height: 30px;
     border: none;
@@ -53,9 +54,17 @@
     font-size: 15px;
 }
 
-#login-form > form > button.active-button {
+#login-form > form > button#login-button.active-button {
     background-color: rgb(46, 159, 251);
     cursor: pointer;
+}
+
+#login-form > form > button#login-demo, #login-form > form > button#login-demo > i {
+    color: #385185;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 #login-form > form > div {
@@ -74,16 +83,6 @@
     width: 120px;
     height: 1px;
     background-color: rgba(var(--b6a,219,219,219),1);
-}
-
-#login-form > form > a {
-    font-weight: 600;
-    text-decoration: none;
-    color: #385185;
-}
-
-#login-form > form > a > i {
-    color: #385185;
 }
 
 #no-account {

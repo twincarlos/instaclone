@@ -51,10 +51,6 @@
     margin-right: 20px;
 }
 
-#signup-div > form > a > i {
-    color: white;
-}
-
 #signup-div > form {
     display: flex;
     flex-direction: column;
@@ -75,7 +71,26 @@
     outline: none;
 }
 
-#signup-div > form > button {
+#signup-div > form > button#signup-demo, #signup-div > form > button#signup-demo > i {
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#signup-div > form > button#signup-demo {
+    font-weight: 600;
+    font-size: 17px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(46, 159, 251);
+    width: 76%;
+    height: 30px;
+    padding-top: 0px;
+    border-radius: 5px;
+}
+
+#signup-div > form > button#signup-button {
     width: 75.7%;
     height: 30px;
     border: none;
@@ -94,7 +109,7 @@
     color: #8E8E8E;
 }
 
-#signup-div > form > button.active-button {
+#signup-div > form > button#signup-button.active-button {
     background-color: rgb(46, 159, 251);
     cursor: pointer;
 }

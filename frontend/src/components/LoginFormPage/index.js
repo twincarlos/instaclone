@@ -37,7 +37,8 @@ function LoginFormPage() {
       });
   }
 
-  const handleDemo = () => {
+  const handleDemo = (e) => {
+    e.preventDefault();
     setErrors([]);
     return dispatch(sessionActions.login({ credential: 'demo@user.io', password: 'password' }))
       .catch(async (res) => {
@@ -69,9 +70,9 @@ function LoginFormPage() {
             placeholder='Password'
             required
           />
-          <button type="submit" disabled={!activeButton} className={activeButton ? 'active-button' : null}>Log In</button>
+          <button id='login-button' type="submit" disabled={!activeButton} className={activeButton ? 'active-button' : null}>Log In</button>
           <div><span /><p>OR</p><span /></div>
-          <NavLink to='/' onClick={() => handleDemo()}><i className="fas fa-user"></i> Login as Demo</NavLink>
+          <button id='login-demo' to='/' onClick={handleDemo}><i className="fas fa-user"></i> Login as Demo</button>
         </form>
         <div id='no-account'>
           Don't have an account? <NavLink to='/signup'>Sign up</NavLink>

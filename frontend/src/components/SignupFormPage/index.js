@@ -40,7 +40,8 @@ function SignupFormPage() {
     return setErrors(['Passwords do not match.']);
   };
 
-  const handleDemo = () => {
+  const handleDemo = (e) => {
+    e.preventDefault();
     setErrors([]);
     return dispatch(sessionActions.login({ credential: 'demo@user.io', password: 'password' }))
       .catch(async (res) => {
@@ -54,7 +55,7 @@ function SignupFormPage() {
       <form onSubmit={handleSubmit}>
         <img src={logo} alt=''></img>
         <p id='signup-to-see'>Sign up to see photos and videos from your friends.</p>
-        <NavLink to='/' onClick={() => handleDemo()}><i className="fas fa-user"></i> Login as Demo</NavLink>
+        <button id='signup-demo' to='/' onClick={handleDemo}><i className="fas fa-user"></i> Login as Demo</button>
         <div><span/><p>OR</p><span /></div>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -87,7 +88,7 @@ function SignupFormPage() {
             placeholder='Confirm Password'
             required
           />
-        <button type="submit" disabled={activeButton ? false : true} className={activeButton ? 'active-button' : null}>Sign Up</button>
+        <button id='signup-button' type="submit" disabled={activeButton ? false : true} className={activeButton ? 'active-button' : null}>Sign Up</button>
         <p id='terms'>By signing up, you agree to our <b>Terms</b> , <b>Data Policy</b> and <b>Cookies Policy</b> .</p>
       </form>
       <div id='no-account'>
