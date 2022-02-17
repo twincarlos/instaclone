@@ -1,6 +1,6 @@
 .media-modal-div {
     display: flex;
-    height: 1400px;
+    height: 1425px;
     margin: 0 auto;
 }
 
@@ -17,7 +17,27 @@
 
 .media-modal-div > .comments-section > ul > li > span > i.fa-ellipsis-h {
     position: absolute;
-    right: 30px;
+    right: 20px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 2000px) {
+    .all-user-comments {
+        height: 1180px;
+    }
+
+    .interaction-icons > i {
+        margin-right: 20px;
+    }
+
+    .interaction-icons > i.fa-paper-plane {
+        margin-right: 360px;
+    }
+
+    .add-a-comment-li > form > input {
+        width: 400px;
+        margin: 0 20px;
+    }
 }
 
 @media screen and (max-width: 2000px) and (min-width: 1300px) {
@@ -30,6 +50,23 @@
     .media-modal-div > .comments-section {
         width: 400px;
     }
+
+    .all-user-comments {
+        height: 660px;
+    }
+
+    .interaction-icons > i {
+        margin-right: 20px;
+    }
+
+    .interaction-icons > i.fa-paper-plane {
+        margin-right: 210px;
+    }
+
+    .add-a-comment-li > form > input {
+        width: 254px;
+        margin: 0 20px;
+    }
 }
 
 @media screen and (max-width: 1300px) {
@@ -40,11 +77,28 @@
     }
 
     .media-modal-div > .comments-section {
-        width: 300px;
+        width: 400px;
+    }
+
+    .all-user-comments {
+        height: 460px;
+    }
+
+    .interaction-icons > i {
+        margin-right: 20px;
+    }
+
+    .interaction-icons > i.fa-paper-plane {
+        margin-right: 210px;
+    }
+
+    .add-a-comment-li > form > input {
+        width: 254px;
+        margin: 0 20px;
     }
 }
 
-.media-modal-div > .comments-section > ul > li {
+.media-modal-div > .comments-section > ul > li.author-li {
     display: flex;
     align-items: center;
     padding-left: 15px;
@@ -79,11 +133,10 @@
     font-size: 17px;
 }
 
-.media-modal-div > .comments-section > ul > li > div {
-    width: 42px;
-    height: 42px;
+.media-modal-div > .comments-section > ul > li > div.author-profile-image {
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    background-color: white;
     margin-right: 15px;
 }
 
@@ -91,6 +144,186 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    margin-top: 3px;
-    margin-left: 3px;
+    margin-top: 2px;
+    margin-left: 2px;
+    border: 3px solid white;
+}
+
+/* COMMENTS */
+
+.comment-user {
+    display: flex;
+    align-items: center;
+}
+
+.comment-user-image {
+    width: 46px;
+    height: 46px;
+    margin-left: -25px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.all-user-comments {
+    width: 100%;
+    border-bottom: 1.5px solid #efefef;
+    position: relative;
+    right: 40px;
+}
+
+.comment-user-image > a > img {
+    width: 36px;
+    height: 36px;
+    margin-top: 2px;
+    margin-left: 2px;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+.comment-user-span {
+    display: flex;
+    margin-bottom: -20px;
+}
+
+.comment-user-span > a {
+    margin-top: 16px;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.comment-user-likes {
+    display: flex;
+    font-size: 14px;
+}
+
+.comment-user-likes > p {
+    color: #8E8E8E;
+}
+
+.comment-likes-p {
+    font-weight: 600;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.comment-user > i {
+    position: absolute;
+    right: 20px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+/* COMMENT USER INPUT */
+
+.user-input-section {
+    display: flex;
+    flex-direction: column;
+    line-height: 5px;
+    padding-left: 15px;
+    margin-top: 10px;
+    border-bottom: 1.5px solid #efefef;
+    padding-bottom: 10px;
+}
+
+.interaction-icons {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.interaction-icons > i {
+    cursor: pointer;
+}
+
+.user-input-section > div.interaction-icons {
+    font-size: 28px;
+    width: 100%;
+}
+
+.user-input-section > div > div {
+    display: flex;
+}
+
+.who-has-liked {
+    width: 100%;
+}
+
+.time-posted {
+    width: 100%;
+    font-size: 12px;
+}
+
+.time-posted > p {
+    color: #8E8E8E;
+}
+
+.who-has-liked > div {
+    align-items: center;
+    margin-left: 23px;
+    margin-bottom: -5px;
+}
+
+.user-input-section > div > div > p > a,  .user-input-section > div > div > p > b {
+    font-weight: 600;
+    color: #262626;
+    cursor: pointer;
+}
+
+.user-like-bubble {
+    width: 30px;
+    height: 30px;
+    margin-left: -25px;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.user-like-bubble > img {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    margin-left: 2px;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+.bubble0 {
+    z-index: 2;
+}
+
+.bubble1 {
+    z-index: 1;
+}
+
+/* ADD A COMMENT LI */
+
+.add-a-comment-li {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.add-a-comment-li > i {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.add-a-comment-li > form > input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.add-a-comment-li > form > button {
+    background-color: transparent;
+    border: none;
+    color: #0094f659;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: default;
+}
+
+.add-a-comment-li > form > button.can-comment {
+    color: #0094f6;
+    cursor: pointer;
 }

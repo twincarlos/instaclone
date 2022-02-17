@@ -37,8 +37,8 @@ function UserPage () {
                     </div>
                     <div id='user-header-middle'>
                         <p><b>4,936</b> posts</p>
-                        <p><b>294m</b> followers</p>
-                        <p><b>958</b> following</p>
+                        <p id='followers-number'><b>294m</b> followers</p>
+                        <p id='following-number'><b>958</b> following</p>
                     </div>
                     <div id='user-header-bottom'>
                         <p><b>Ariana Grande</b></p>
