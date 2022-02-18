@@ -40,7 +40,7 @@ function LoginFormPage() {
   const handleDemo = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential: 'demo@user.io', password: 'password' }))
+    return dispatch(sessionActions.login({ credential: 'araiana@grande.io', password: 'password' }))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);

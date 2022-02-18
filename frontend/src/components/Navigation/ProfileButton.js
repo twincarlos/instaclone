@@ -37,7 +37,7 @@ function ProfileButton({ user }) {
       <i className="far fa-compass"></i>
       <i className="far fa-heart nav-heart"></i>
       <button id='user-button' onClick={openMenu}>
-        <img src='https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg' alt=''></img>
+        <img src={user.profileImageUrl} alt=''></img>
       </button>
       {showMenu && (
         <ul className="profile-dropdown">

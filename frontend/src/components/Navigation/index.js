@@ -12,7 +12,7 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   const handleDemo = () => {
-    return dispatch(sessionActions.login({ credential: 'demo@user.io', password: 'password' }));
+    return dispatch(sessionActions.login({ credential: 'ariana@grande.io', password: 'password' }));
   }
 
   let sessionLinks;

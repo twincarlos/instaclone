@@ -1,13 +1,24 @@
 import { useParams, NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import StoryHighlights from '../StoryHighlights';
 import PostsGallery from '../PostsGallery';
+
+import { getOneUser } from '../../store/user';
 
 import './UserPage.css';
 
 function UserPage () {
+    const dispatch = useDispatch();
     const userId = useParams().id;
     const sessionUser = useSelector(state => state.session.user);
+    const user = useSelector(state => state.user.user?.user);
+
+    useEffect(() => {
+        dispatch(getOneUser(userId));
+    }, [dispatch, userId]);
+
+    if (!user) return null;
 
     const ari = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
@@ -17,10 +28,10 @@ function UserPage () {
     return (
         <div>
             <div id='user-header'>
-                <img src='https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg' alt=''></img>
+                <img src={user.profileImageUrl} alt=''></img>
                 <div>
                     <div id='user-header-top'>
-                        <h1>arianagrande</h1>
+                        <h1>{user.username}</h1>
                         {
                             (sessionUser && sessionUser?.id === Number(userId))
                             ?
@@ -41,7 +52,7 @@ function UserPage () {
                         <p id='following-number'><b>958</b> following</p>
                     </div>
                     <div id='user-header-bottom'>
-                        <p><b>Ariana Grande</b></p>
+                        <p><b>{user.username}</b></p>
                         <a target="_blank" rel="noreferrer" href='https://rembeauty.com/'>rembauty.com</a>
                         <p id='followed-by'>Followed by <b>username</b>, <b>username</b>, <b>username</b> +158 more</p>
                     </div>
