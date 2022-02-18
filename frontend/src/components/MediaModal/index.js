@@ -8,6 +8,7 @@ import './MediaModal.css';
 function MediaModal({ media }) {
     const sessionUser = useSelector(state => state.session.user);
     const [input, setInput] = useState('');
+    console.log(media)
 
     const COMMENTS = [
         {user: 'twincarloss', comment: 'i love u', userImage: 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg', time: '35m', commentLikes: '42 likes'},
@@ -19,7 +20,7 @@ function MediaModal({ media }) {
 
     return (
         <div className='media-modal-div'>
-            <img src={media} alt=''></img>
+            <img src={media.postImageUrl} alt=''></img>
             <div className='comments-section'>
                 <ul>
                     <li className='author-li'>

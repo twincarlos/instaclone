@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import user from './user';
+import post from './post';
 
 let enhancer;
 
@@ -21,7 +22,8 @@ const configureStore = (preloadedState) => {
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  user
+  user,
+  post
 });
 
 export default configureStore;

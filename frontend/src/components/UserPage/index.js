@@ -5,6 +5,7 @@ import StoryHighlights from '../StoryHighlights';
 import PostsGallery from '../PostsGallery';
 
 import { getOneUser } from '../../store/user';
+import { getAllPostsByUserId } from '../../store/post';
 
 import './UserPage.css';
 
@@ -13,17 +14,19 @@ function UserPage () {
     const userId = useParams().id;
     const sessionUser = useSelector(state => state.session.user);
     const user = useSelector(state => state.user.user?.user);
+    const postList = useSelector(state => state.post.postList);
 
     useEffect(() => {
         dispatch(getOneUser(userId));
+        dispatch(getAllPostsByUserId(userId));
     }, [dispatch, userId]);
 
     if (!user) return null;
 
     const ari = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
-'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
-'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
-'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg'];
+                'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
+                'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
+                'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg'];
 
     return (
         <div>
@@ -65,7 +68,7 @@ function UserPage () {
                 <NavLink to={`/users/${userId}`}><i className="far fa-play-circle"></i> VIDEOS</NavLink>
                 <NavLink to={`/users/${userId}`}><i className="fas fa-user-tag"></i> TAGGED</NavLink>
             </ul>
-            <PostsGallery posts={ari}/>
+            <PostsGallery postList={postList}/>
         </div>
     );
 }

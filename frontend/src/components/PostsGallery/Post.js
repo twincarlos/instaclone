@@ -9,7 +9,7 @@ function Post({ post }) {
 
     return (
         <div>
-            <img src={post} alt=''></img>
+            <img src={post.postImageUrl} alt=''></img>
             <span className='hover-stats' onClick={() => setShowModal(true)}>
                 <p className='hover-likes'><i className="fas fa-heart"></i> 1.4m</p>
                 <p className='hover-comments'><i className="fas fa-comment"></i> 52</p>
