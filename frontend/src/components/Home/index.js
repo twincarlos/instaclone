@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import LoginFormPage from '../LoginFormPage';
 import UserStories from '../UserStories';
+import HomeContent from '../HomeContent';
 
 import './Home.css';
 
@@ -11,6 +12,7 @@ function Home () {
         sessionUser ?
         <div id='home'>
             <UserStories />
+            <HomeContent />
         </div>
         :
         <LoginFormPage />

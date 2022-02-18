@@ -4,6 +4,7 @@ div#user-stories {
     border: 1px solid rgba(var(--b6a,219,219,219),1);
     display: flex;
     align-items: center;
+    margin-bottom: 28px;
 }
 
 div#user-stories > div {

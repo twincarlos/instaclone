@@ -1,0 +1,165 @@
+div.media-widget {
+    border: 1px solid #dbdbdb;
+    background-color: white;
+    margin-bottom: 25px;
+}
+
+div.media-widget > div.media-header > i {
+    cursor: pointer;
+}
+
+div.media-widget > img {
+    width: 100%;
+}
+
+div.media-widget > div.media-header {
+    height: 66px;
+    border-bottom: 1px solid #EFEFEF;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+div.media-widget > div.media-header > div {
+    width: 43px;
+    height: 43px;
+    margin-right: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+div.media-widget > div.media-header > div > img {
+    width: 32px;
+    height: 32px;
+    margin-top: 2.5px;
+    margin-left: 2.5px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+div.media-widget > div.media-header > p {
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 480px;
+}
+
+div.media-widget > div.media-header > i {
+    cursor: pointer;
+}
+
+div.media-widget > div.interaction-section {
+    margin-top: -6px;
+    height: auto;
+    border-bottom: 1px solid #EFEFEF;
+}
+
+div.media-widget > div.interaction-section > div.icons-section > i {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+div.media-widget > div.interaction-section > div.icons-section > i.fa-paper-plane {
+    margin-right: 460px;
+}
+
+div.media-widget > div.interaction-section > div.who-liked-it {
+    display: flex;
+    align-items: center;
+    margin-bottom: -25px;
+}
+
+div.media-widget > div.interaction-section > p {
+    margin-left: 17px;
+}
+
+div.media-widget > div.interaction-section > p > b {
+    color: #262626;
+    cursor: pointer;
+}
+
+div.media-widget > div.interaction-section > p.view-all-comments {
+    color: #8E8E8E;
+    margin-top: -15px;
+    margin-bottom: -5px;
+}
+
+div.media-widget > div.interaction-section > div.who-liked-it > div.users-bubbles {
+    display: flex;
+    margin-left: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+div.media-widget > div.interaction-section > div.who-liked-it > div.users-bubbles > div {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: white;
+    margin-right: -10px;
+}
+
+div.media-widget > div.interaction-section > div.who-liked-it > div.users-bubbles > div > img {
+    margin-top: 2.5px;
+    margin-left: 2.5px;
+    width: 80%;
+    border-radius: 50%;
+}
+
+div.media-widget > div.interaction-section > div.most-recent-comments {
+    margin-left: 17px;
+    line-height: 5px;
+    margin-bottom: -4px;
+    font-size: 16px;
+}
+
+div.media-widget > div.interaction-section > div.most-recent-comments > p > b {
+    color: #262626;
+    cursor: pointer;
+}
+
+div.media-widget > div.interaction-section > div.who-liked-it > p > b {
+    color: #262626;
+    cursor: pointer;
+}
+
+div.media-widget > div.interaction-section > p.time-posted {
+    color: #8E8E8E;
+    font-size: 11px;
+}
+
+div.media-widget > div.add-comment-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+div.media-widget > div.add-comment-section > form > input {
+    width: 550px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    margin: auto 10px;
+}
+
+div.media-widget > div.add-comment-section > form > button {
+    background-color: transparent;
+    color: #0094f64f;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: default;
+}
+
+div.media-widget > div.add-comment-section > form > button.can-comment {
+    color: #0094f6;
+    cursor: pointer;
+}
+
+div.media-widget > div.add-comment-section > i {
+    font-size: 30px;
+    cursor: pointer;
+}
