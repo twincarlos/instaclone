@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { createUser } from "../../store/session";
 import logo from '../../assets/logo.png'
 
 import './SignupForm.css';
@@ -13,6 +14,9 @@ function SignupFormPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [image, setImage] = useState(null);
+  // // for multuple file upload
+  //   const [images, setImages] = useState([]);
   const [errors, setErrors] = useState([]);
   const [activeButton, setActiveButton] = useState(false);
 
@@ -26,19 +30,37 @@ function SignupFormPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
-    }
-    return setErrors(['Passwords do not match.']);
+    let newErrors = [];
+    dispatch(createUser({ username, email, password, image }))
+      .then(() => {
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setImage(null);
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          newErrors = data.errors;
+          setErrors(newErrors);
+        }
+      });
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (password === confirmPassword) {
+  //     setErrors([]);
+  //     return dispatch(sessionActions.signup({ email, username, password }))
+  //       .catch(async (res) => {
+  //         const data = await res.json();
+  //         if (data && data.errors) setErrors(data.errors);
+  //       });
+  //   }
+  //   return setErrors(['Passwords do not match.']);
+  // };
 
   const handleDemo = (e) => {
     e.preventDefault();
@@ -49,6 +71,17 @@ function SignupFormPage() {
         if (data && data.errors) setErrors(data.errors);
       });
   }
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
+  };
+
+  // // for multiple file upload
+  //   const updateFiles = (e) => {
+  //     const files = e.target.files;
+  //     setImages(files);
+  //   };
 
   return (
     <div id='signup-div'>
@@ -88,6 +121,14 @@ function SignupFormPage() {
             placeholder='Confirm Password'
             required
           />
+          <input type="file" onChange={updateFile} />
+        {/* <label>
+            Multiple Upload
+            <input
+              type="file"
+              multiple
+              onChange={updateFiles} />
+          </label> */}
         <button id='signup-button' type="submit" disabled={activeButton ? false : true} className={activeButton ? 'active-button' : null}>Sign Up</button>
         <p id='terms'>By signing up, you agree to our <b>Terms</b> , <b>Data Policy</b> and <b>Cookies Policy</b> .</p>
       </form>
