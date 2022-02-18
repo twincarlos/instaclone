@@ -1,9 +1,10 @@
 import './UserStories.css'
 
-function StoryWidget() {
+function StoryWidget({ story }) {
     return (
         <div>
-            <h1>StoryWidget</h1>
+            <img src={story} alt=''></img>
+            <p>ari</p>
         </div>
     );
 }

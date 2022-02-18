@@ -1,9 +1,15 @@
+import StoryWidget from './StoryWidget';
+
 import './UserStories.css'
 
-function UserStories () {
+function UserStories() {
+    const ari = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
+                'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
+                'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
+                'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg'];
     return (
         <div id='user-stories'>
-            <h1>UserStories</h1>
+            {ari.map((story, idx) => <StoryWidget key={idx.toString()} story={story} />)}
         </div>
     );
 }
