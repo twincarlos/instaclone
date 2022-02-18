@@ -1,14 +1,21 @@
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import Comment from './Comment';
+
+import { getOneUser } from '../../store/user';
 
 import './MediaModal.css';
 
 function MediaModal({ media }) {
+    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    const owner = useSelector((state => state.user.user.user));
     const [input, setInput] = useState('');
-    console.log(media)
+
+    useEffect(() => {
+        dispatch(getOneUser(media.userId));
+    }, [dispatch, media.userId]);
 
     const COMMENTS = [
         {user: 'twincarloss', comment: 'i love u', userImage: 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg', time: '35m', commentLikes: '42 likes'},
@@ -25,10 +32,10 @@ function MediaModal({ media }) {
                 <ul>
                     <li className='author-li'>
                         <div className='author-profile-image'>
-                            <NavLink to='/users/1'><img src='https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg' alt=''></img></NavLink>
+                            <NavLink to={`/users/${owner.id}`}><img src={owner.profileImageUrl} alt=''></img></NavLink>
                         </div>
                         <span>
-                            <NavLink to='/users/1'>arianagrande</NavLink>{((sessionUser?.id !== 1) && (<><i className="fas fa-circle"></i><button>Follow</button></>))}<i className="fas fa-ellipsis-h"></i>
+                            <NavLink to={`/users/${owner.id}`}>{owner.username}</NavLink>{((sessionUser?.id !== owner.id) && (<><i className="fas fa-circle"></i><button>Follow</button></>))}<i className="fas fa-ellipsis-h"></i>
                         </span>
                     </li>
                     <ul className='all-user-comments'>
