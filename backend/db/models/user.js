@@ -29,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [60, 60]
       }
+    },
+    profileImageUrl: {
+      type: DataTypes.STRING
     }
   },
     {
@@ -75,12 +78,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ username, email, password, profileImageUrl }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,
       email,
-      hashedPassword
+      hashedPassword,
+      profileImageUrl
     });
     return await User.scope('currentUser').findByPk(user.id);
   };
