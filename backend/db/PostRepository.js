@@ -15,4 +15,10 @@ async function editPost(data) {
     return editPost;
 }
 
-module.exports = { postsByUserId, postById, editPost };
+async function deletePost(id) {
+    const post = await Post.findByPk(id);
+    await post.destroy();
+    return post;
+}
+
+module.exports = { postsByUserId, postById, editPost, deletePost };

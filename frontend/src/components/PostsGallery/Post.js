@@ -5,19 +5,19 @@ import MediaModal from '../MediaModal';
 import './PostsGallery.css';
 
 function Post({ post, owner }) {
-    const [showModal, setShowModal] = useState(false);
+    const [showMainModal, setShowMainModal] = useState(false);
 
     return (
         <div>
             <img src={post.postImageUrl} alt=''></img>
-            <span className='hover-stats' onClick={() => setShowModal(true)}>
+            <span className='hover-stats' onClick={() => setShowMainModal(true)}>
                 <p className='hover-likes'><i className="fas fa-heart"></i> 1.4m</p>
                 <p className='hover-comments'><i className="fas fa-comment"></i> 52</p>
             </span>
             {
-                showModal && (
-                    <Modal onClose={() => setShowModal(false)}>
-                        <MediaModal post={post} owner={owner}/>
+                showMainModal && (
+                    <Modal onClose={() => setShowMainModal(false)}>
+                        <MediaModal post={post} owner={owner} setShowMainModal={setShowMainModal}/>
                     </Modal>
                 )
             }

@@ -19,4 +19,10 @@ router.put('/', async (req, res) => {
     return res.json(post);
 });
 
+router.delete('/', async (req, res) => {
+    const { id } = req.body;
+    const post = await PostRepository.deletePost(id);
+    return res.json(post);
+});
+
 module.exports = router;

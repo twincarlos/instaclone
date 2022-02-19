@@ -2,11 +2,11 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import { editOnePost } from '../../store/post';
+import { editOnePost, deleteOnePost } from '../../store/post';
 
 import './MediaModal.css';
 
-function MediaModal({ post, owner }) {
+function MediaModal({ post, owner, setShowMainModal }) {
     const [showModal, setShowModal] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
@@ -24,6 +24,13 @@ function MediaModal({ post, owner }) {
         setShowEdit(false);
         setShowModal(false);
         return dispatch(editOnePost({ id: post.id, caption }));
+    }
+
+    const handleDelete = () => {
+        setShowDelete(false);
+        setShowModal(false);
+        setShowMainModal(false);
+        return dispatch(deleteOnePost({ id: post.id }));
     }
 
     return (
@@ -91,7 +98,7 @@ function MediaModal({ post, owner }) {
                                 <div id='delete-post-modal'>
                                     <p id='delete-post-p'>Delete Post?</p>
                                     <p id='are-you-sure-p'>Are you sure you want to delete this post?</p>
-                                    <button id='delete-sure-button'>Delete</button>
+                                    <button id='delete-sure-button' onClick={handleDelete}>Delete</button>
                                     <button onClick={() => {
                                         setShowDelete(false);
                                         setShowModal(true);

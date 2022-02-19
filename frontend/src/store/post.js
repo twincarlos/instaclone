@@ -1,7 +1,8 @@
 import { csrfFetch } from "./csrf";
 const GET_ALL_POSTS_BY_USERID = 'posts/GET_ALL_POSTS_BY_USER_ID';
-const EDIT_POST = 'posts/EDIT_POST';
 const GET_POST_BY_ID = 'posts/GET_POST_BY_ID';
+const EDIT_POST = 'posts/EDIT_POST';
+const DELETE_POST = 'posts/DELETE_POST';
 
 const allPostsByUserId = (postList) => {
     return {
@@ -21,6 +22,13 @@ const editPost = (newPost) => {
     return {
         type: EDIT_POST,
         newPost
+    }
+}
+
+const deletePost = (postToDelete) => {
+    return {
+        type: DELETE_POST,
+        postToDelete
     }
 }
 
@@ -57,6 +65,16 @@ export const editOnePost = (data) => async (dispatch) => {
     return newPost;
 }
 
+export const deleteOnePost = (id) => async (dispatch) => {
+    const response = await csrfFetch('/api/posts', {
+        method: 'DELETE',
+        body: JSON.stringify(id)
+    })
+    const postToDelete = await response.json();
+    dispatch(deletePost(postToDelete));
+    return postToDelete;
+}
+
 const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
@@ -72,6 +90,12 @@ const postsReducer = (state = initialState, action) => {
         case EDIT_POST: {
             const newPost = action.newPost;
             state.postList = state.postList.map((post) => post.id === newPost.id ? newPost : post);
+            const newState = { ...state };
+            return newState;
+        }
+        case DELETE_POST: {
+            const postToDelete = action.postToDelete;
+            state.postList = state.postList.filter((post) => post.id !== postToDelete.id);
             const newState = { ...state };
             return newState;
         }
