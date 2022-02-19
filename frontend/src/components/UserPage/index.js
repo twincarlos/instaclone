@@ -2,6 +2,7 @@ import { useParams, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import StoryHighlights from '../StoryHighlights';
+// import Post from '../PostsGallery/Post';
 import PostsGallery from '../PostsGallery';
 
 import { getOneUser } from '../../store/user';
@@ -68,7 +69,9 @@ function UserPage () {
                 <NavLink to={`/users/${userId}`}><i className="far fa-play-circle"></i> VIDEOS</NavLink>
                 <NavLink to={`/users/${userId}`}><i className="fas fa-user-tag"></i> TAGGED</NavLink>
             </ul>
-            <PostsGallery postList={postList}/>
+            <div id='posts-gallery'>
+                <PostsGallery postList={postList} owner={user}/>
+            </div>
         </div>
     );
 }

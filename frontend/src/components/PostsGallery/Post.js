@@ -4,7 +4,7 @@ import MediaModal from '../MediaModal';
 
 import './PostsGallery.css';
 
-function Post({ post }) {
+function Post({ post, owner }) {
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -17,7 +17,7 @@ function Post({ post }) {
             {
                 showModal && (
                     <Modal onClose={() => setShowModal(false)}>
-                        <MediaModal media={post} />
+                        <MediaModal post={post} owner={owner}/>
                     </Modal>
                 )
             }

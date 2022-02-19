@@ -8,4 +8,15 @@ router.get('/all/:userId', async (req, res) => {
     return res.json(postList);
 });
 
+router.get('/:id', async (req, res) => {
+    const post = await PostRepository.postById(req.params.id);
+    return res.json(post);
+})
+
+router.put('/', async (req, res) => {
+    const { id, caption } = req.body;
+    const post = await PostRepository.editPost({ id, caption });
+    return res.json(post);
+});
+
 module.exports = router;

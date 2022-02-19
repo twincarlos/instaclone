@@ -327,3 +327,119 @@
     color: #0094f6;
     cursor: pointer;
 }
+
+/* DELETE EDIT CANCEL MODAL */
+
+div#delete-edit-cancel-modal {
+    background-color: white;
+    width: 445px;
+    height: 170px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+div#delete-edit-cancel-modal > button {
+    background-color: transparent;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+div#delete-edit-cancel-modal > button#delete-post-button {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    color: #ED4956;
+    font-weight: 600;
+}
+
+div#delete-edit-cancel-modal > button#cancel-post-button {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+
+/* DELETE POST MODAL */
+
+div#delete-post-modal {
+    width: 445px;
+    height: 215px;
+    background-color: white;
+    margin-bottom: 0px;
+    border-radius: 12px;
+    text-align: center;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+div#delete-post-modal > p#delete-post-p {
+    font-size: 18px;
+    font-weight: 600;
+    font-size: 21px;
+}
+
+div#delete-post-modal > p#are-you-sure-p {
+    margin-top: -18px;
+    font-size: 16px;
+    color: #8E8E8E;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+div#delete-post-modal > button {
+    height: 60px;
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    font-size: 17px;
+}
+
+div#delete-post-modal > button#delete-sure-button {
+    font-weight: 600;
+    color: #ED4956;
+}
+
+/* EDIT POST MODAL */
+
+div#edit-post-modal {
+    width: 445px;
+    height: 260px;
+    background-color: white;
+    margin-bottom: 0px;
+    border-radius: 12px;
+    text-align: center;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+div#edit-post-modal > form {
+    display: flex;
+    flex-direction: column;
+}
+
+div#edit-post-modal > form > textarea {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+div#edit-post-modal > form > button {
+    height: 60px;
+    font-size: 17px;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    background-color: white;
+    font-weight: 600;
+    color: #0095F6;
+}
+
+div#edit-post-modal > button {
+    height: 60px;
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    font-size: 17px;
+}

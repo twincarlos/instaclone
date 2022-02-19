@@ -4,4 +4,15 @@ async function postsByUserId(userId) {
     return await Post.findAll({ where: { userId } });
 }
 
-module.exports = { postsByUserId };
+async function postById(id) {
+    return await Post.findByPk(id);
+}
+
+async function editPost(data) {
+    const { id, caption } = data
+    const post = await Post.findByPk(id);
+    const editPost = await post.update({ caption });
+    return editPost;
+}
+
+module.exports = { postsByUserId, postById, editPost };
