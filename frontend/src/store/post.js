@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 const GET_ALL_POSTS_BY_USERID = 'posts/GET_ALL_POSTS_BY_USER_ID';
 const GET_POST_BY_ID = 'posts/GET_POST_BY_ID';
+const CREATE_POST = 'posts/CREATE_POST';
 const EDIT_POST = 'posts/EDIT_POST';
 const DELETE_POST = 'posts/DELETE_POST';
 
@@ -18,10 +19,17 @@ const getPostById = (post) => {
     }
 }
 
-const editPost = (newPost) => {
+const createPost = (newPost) => {
+    return {
+        type: CREATE_POST,
+        newPost
+    }
+}
+
+const editPost = (postToEdit) => {
     return {
         type: EDIT_POST,
-        newPost
+        postToEdit
     }
 }
 
@@ -51,6 +59,26 @@ export const getOnePostById = (id) => async (dispatch) => {
     return post;
 }
 
+export const createOnePost = (data) => async (dispatch) => {
+    const { userId, postImageUrl, caption } = data;
+    const formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('postImageUrl', postImageUrl);
+    formData.append('caption', caption);
+
+    const response = await csrfFetch('/api/posts', {
+        method: "POST",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    });
+
+    const newPost = await response.json();
+    dispatch(createPost(newPost));
+    return newPost;
+}
+
 export const editOnePost = (data) => async (dispatch) => {
     const response = await csrfFetch('/api/posts', {
         method: 'PUT',
@@ -60,9 +88,9 @@ export const editOnePost = (data) => async (dispatch) => {
         body: JSON.stringify(data)
     });
 
-    const newPost = await response.json();
-    dispatch(editPost(newPost));
-    return newPost;
+    const postToEdit = await response.json();
+    dispatch(editPost(postToEdit));
+    return postToEdit;
 }
 
 export const deleteOnePost = (id) => async (dispatch) => {
@@ -87,9 +115,15 @@ const postsReducer = (state = initialState, action) => {
             const newState = { ...state, post: action.post };
             return newState;
         }
-        case EDIT_POST: {
+        case CREATE_POST: {
             const newPost = action.newPost;
-            state.postList = state.postList.map((post) => post.id === newPost.id ? newPost : post);
+            state.postList = [newPost, ...state.postList];
+            const newState = { ...state };
+            return newState;
+        }
+        case EDIT_POST: {
+            const postToEdit = action.postToEdit;
+            state.postList.map((post) => post.id === postToEdit.id ? postToEdit : post);
             const newState = { ...state };
             return newState;
         }

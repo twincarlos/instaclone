@@ -31,11 +31,6 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <NavLink to='/'><i className="fas fa-home"></i></NavLink>
-      <i className="far fa-comment-dots"></i>
-      <i className="far fa-plus-square"></i>
-      <i className="far fa-compass"></i>
-      <i className="far fa-heart nav-heart"></i>
       <button id='user-button' onClick={openMenu}>
         <img src={user.profileImageUrl} alt=''></img>
       </button>

@@ -1,4 +1,5 @@
 const express = require('express');
+const { singlePrivateFileUpload, singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 const PostRepository = require('../../db/PostRepository');
 
 const router = express.Router();
@@ -17,6 +18,13 @@ router.put('/', async (req, res) => {
     const { id, caption } = req.body;
     const post = await PostRepository.editPost({ id, caption });
     return res.json(post);
+});
+
+router.post('/', singleMulterUpload('postImageUrl'), async (req, res) => {
+    const { userId, caption } = req.body;
+    const postImageUrl = await singlePublicFileUpload(req.file);
+    const newPost = await PostRepository.createPost({ userId, postImageUrl, caption });
+    return res.json(newPost);
 });
 
 router.delete('/', async (req, res) => {

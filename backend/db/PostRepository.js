@@ -8,6 +8,20 @@ async function postById(id) {
     return await Post.findByPk(id);
 }
 
+async function createPost(post) {
+    const { userId, postImageUrl, caption } = post;
+    // console.log(`Frontend: ${post.userId}, ${post.postImageUrl}, ${post.caption}`);
+
+    const newPost = await Post.create({
+        userId,
+        postImageUrl,
+        caption
+    });
+
+    await newPost.save();
+    return newPost;
+}
+
 async function editPost(data) {
     const { id, caption } = data
     const post = await Post.findByPk(id);
@@ -21,4 +35,4 @@ async function deletePost(id) {
     return post;
 }
 
-module.exports = { postsByUserId, postById, editPost, deletePost };
+module.exports = { postsByUserId, postById, createPost, editPost, deletePost };
