@@ -7,6 +7,7 @@ import PostsGallery from '../PostsGallery';
 
 import { getOneUser } from '../../store/user';
 import { getAllPostsByUserId } from '../../store/post';
+import { followOneUser } from '../../store/follow';
 
 import './UserPage.css';
 
@@ -23,6 +24,10 @@ function UserPage () {
     }, [dispatch, userId]);
 
     if (!user) return null;
+
+    const handleFollow = () => {
+        return dispatch(followOneUser({ followerId: sessionUser.id, followeeId: user.id }));
+    }
 
     const ari = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
                 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
@@ -45,13 +50,13 @@ function UserPage () {
                             </span>
                             :
                             <span>
-                                <button className='not-my-profile' type='submit'>Follow</button>
+                                <button className='not-my-profile' type='submit' onClick={handleFollow}>Follow</button>
                                 <i className="fas fa-ellipsis-h"></i>
                             </span>
                         }
                     </div>
                     <div id='user-header-middle'>
-                        <p><b>4,936</b> posts</p>
+                        <p><b>{postList?.length}</b> posts</p>
                         <p id='followers-number'><b>294m</b> followers</p>
                         <p id='following-number'><b>958</b> following</p>
                     </div>

@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import user from './user';
 import post from './post';
+import follow from './follow';
 
 let enhancer;
 
@@ -23,7 +24,8 @@ const configureStore = (preloadedState) => {
 const rootReducer = combineReducers({
   session: sessionReducer,
   user,
-  post
+  post,
+  follow
 });
 
 export default configureStore;
