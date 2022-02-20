@@ -125,6 +125,7 @@ div > #user-header > div > #user-header-top > span > button.not-my-profile {
 
     position: relative;
     margin: 65px auto;
+    margin-bottom: -10px;
 
     border-top: 1px solid #dbdbdb;
 
