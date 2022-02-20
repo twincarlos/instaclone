@@ -17,6 +17,7 @@ function UserPage () {
     const sessionUser = useSelector(state => state.session.user);
     const user = useSelector(state => state.user.user?.user);
     const postList = useSelector(state => state.post.postList);
+    const followers = useSelector(state => state.follow.followers);
 
     useEffect(() => {
         dispatch(getOneUser(userId));
@@ -58,7 +59,7 @@ function UserPage () {
                     </div>
                     <div id='user-header-middle'>
                         <p><b>{postList?.length}</b> posts</p>
-                        <p id='followers-number'><b>294m</b> followers</p>
+                        <p id='followers-number'><b>{followers?.length}</b> followers</p>
                         <p id='following-number'><b>958</b> following</p>
                     </div>
                     <div id='user-header-bottom'>
