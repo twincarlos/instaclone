@@ -7,7 +7,7 @@ import PostsGallery from '../PostsGallery';
 
 import { getOneUser } from '../../store/user';
 import { getAllPostsByUserId } from '../../store/post';
-import { followOneUser } from '../../store/follow';
+import { getFollowers, followOneUser } from '../../store/follow';
 
 import './UserPage.css';
 
@@ -21,6 +21,7 @@ function UserPage () {
     useEffect(() => {
         dispatch(getOneUser(userId));
         dispatch(getAllPostsByUserId(userId));
+        dispatch(getFollowers(userId));
     }, [dispatch, userId]);
 
     if (!user) return null;

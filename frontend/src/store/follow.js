@@ -1,6 +1,15 @@
 import { csrfFetch } from "./csrf";
+
+const FOLLOWERS = 'follow/FOLLOWERS';
 const FOLLOW_USER = 'follow/FOLLOW_USER';
 const UNFOLLOW_USER = 'follow/UNFOLLOW_USER';
+
+const myFollowers = (followers) => {
+    return {
+        type: FOLLOWERS,
+        followers
+    }
+}
 
 const followUser = (follow) => {
     return {
@@ -14,6 +23,14 @@ const unfollowUser = (unfollow) => {
         type: UNFOLLOW_USER,
         unfollow
     }
+}
+
+export const getFollowers = (followeeId) => async dispatch => {
+    const response = await csrfFetch(`/api/follows/followers/${followeeId}`);
+
+    const followers = await response.json();
+    dispatch(myFollowers(followers));
+    return followers;
 }
 
 export const followOneUser = (data) => async dispatch => {
@@ -45,6 +62,9 @@ const initialState = {};
 
 const followsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case FOLLOWERS: {
+            return { ...state, followers: action.followers };
+        }
         case FOLLOW_USER: {
             return { ...state, follow: action.follow };
         }
