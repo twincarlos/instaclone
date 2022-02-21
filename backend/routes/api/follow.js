@@ -22,7 +22,8 @@ router.post('/', async (req, res) => {
         followerId,
         followeeId
     });
-    return res.json(follow);
+    const follower = await User.findByPk(followerId);
+    return res.json(follower);
 });
 
 // Unfollow
@@ -30,7 +31,8 @@ router.delete('/', async (req, res) => {
     const { followerId, followeeId } = req.body;
     const follow = await Follow.findOne({ where: [{ followerId }, {followeeId}]});
     await follow.destroy();
-    return res.json(follow);
+    const follower = await User.findByPk(followerId);
+    return res.json(follower);
 })
 
 module.exports = router;

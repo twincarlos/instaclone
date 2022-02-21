@@ -1,13 +1,13 @@
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Modal } from '../../context/Modal';
 import StoryHighlights from '../StoryHighlights';
-// import Post from '../PostsGallery/Post';
 import PostsGallery from '../PostsGallery';
 
 import { getOneUser } from '../../store/user';
 import { getAllPostsByUserId } from '../../store/post';
-import { getFollowers, followOneUser } from '../../store/follow';
+import { getFollowers, followOneUser, unfollowOneUser } from '../../store/follow';
 
 import './UserPage.css';
 
@@ -18,6 +18,7 @@ function UserPage () {
     const user = useSelector(state => state.user.user?.user);
     const postList = useSelector(state => state.post.postList);
     const followers = useSelector(state => state.follow.followers);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         dispatch(getOneUser(userId));
@@ -29,6 +30,11 @@ function UserPage () {
 
     const handleFollow = () => {
         return dispatch(followOneUser({ followerId: sessionUser.id, followeeId: user.id }));
+    }
+
+    const handleUnfollow = () => {
+        setShowModal(false);
+        return dispatch(unfollowOneUser({ followerId: sessionUser.id, followeeId: user.id }));
     }
 
     const ari = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
@@ -52,7 +58,12 @@ function UserPage () {
                             </span>
                             :
                             <span>
-                                <button className='not-my-profile' type='submit' onClick={handleFollow}>Follow</button>
+                                {
+                                    ((sessionUser) && (followers?.find((follower) => follower.id === sessionUser.id))) ?
+                                        <button onClick={() => setShowModal(true)}>Unfollow</button>
+                                        :
+                                        <button className='not-my-profile' onClick={handleFollow}>Follow</button>
+                                }
                                 <i className="fas fa-ellipsis-h"></i>
                             </span>
                         }
@@ -79,6 +90,20 @@ function UserPage () {
             <div id='posts-gallery'>
                 <PostsGallery postList={postList} owner={user}/>
             </div>
+            {
+                showModal && (
+                    <Modal onClose={() => setShowModal(false)}>
+                        <div id='unfollow-modal'>
+                            <img src={user.profileImageUrl} alt=''></img>
+                            <p>Unfollow @{user.username}?</p>
+                            <span>
+                                <button id='unfollow-button-modal' onClick={handleUnfollow}>Unfollow</button>
+                                <button onClick={() => setShowModal(false)}>Cancel</button>
+                            </span>
+                        </div>
+                    </Modal>
+                )
+            }
         </div>
     );
 }

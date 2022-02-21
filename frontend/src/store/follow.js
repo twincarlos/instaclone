@@ -11,17 +11,17 @@ const myFollowers = (followers) => {
     }
 }
 
-const followUser = (follow) => {
+const followUser = (newFollower) => {
     return {
         type: FOLLOW_USER,
-        follow
+        newFollower
     }
 }
 
-const unfollowUser = (unfollow) => {
+const unfollowUser = (oldFollower) => {
     return {
         type: UNFOLLOW_USER,
-        unfollow
+        oldFollower
     }
 }
 
@@ -42,9 +42,9 @@ export const followOneUser = (data) => async dispatch => {
         body: JSON.stringify(data)
     });
 
-    const follow = await response.json();
-    dispatch(followUser(follow));
-    return follow;
+    const newFollower = await response.json();
+    dispatch(followUser(newFollower));
+    return newFollower;
 }
 
 
@@ -54,10 +54,11 @@ export const unfollowOneUser = (data) => async dispatch => {
         body: JSON.stringify(data)
     });
 
-    const unfollow = await response.json();
-    dispatch(unfollowUser(unfollow));
-    return unfollow;
+    const oldFollower = await response.json();
+    dispatch(unfollowUser(oldFollower));
+    return oldFollower;
 }
+
 const initialState = {};
 
 const followsReducer = (state = initialState, action) => {
@@ -66,10 +67,14 @@ const followsReducer = (state = initialState, action) => {
             return { ...state, followers: action.followers };
         }
         case FOLLOW_USER: {
-            return { ...state, follow: action.follow };
+            const newFollower = action.newFollower;
+            state.followers = [newFollower, ...state.followers];
+            return { ...state };
         }
         case UNFOLLOW_USER: {
-            return { ...state, unfollow: action.unfollow };
+            const oldFollower = action.oldFollower;
+            state.followers = state.followers.filter((follower) => follower.id !== oldFollower.id);
+            return { ...state };
         }
         default:
             return state;
