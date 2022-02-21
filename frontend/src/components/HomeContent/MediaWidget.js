@@ -13,12 +13,12 @@ function MediaWidget({ media }) {
         <div className='media-widget'>
             <div className='media-header'>
                 <div>
-                    <img src={media} alt=''></img>
+                    <img src={media.user.profileImageUrl} alt=''></img>
                 </div>
-                <p>arianagrande</p>
+                <p>{media.user.username}</p>
                 <i className="fas fa-ellipsis-h"></i>
             </div>
-            <img src={media} alt=''></img>
+            <img src={media.post.postImageUrl} alt=''></img>
             <div className='interaction-section'>
                 <div className='icons-section'>
                     <i className="far fa-heart"></i>
@@ -32,7 +32,7 @@ function MediaWidget({ media }) {
                     </div>
                     <p>Liked by <b>username</b> and <b>45,956 others</b></p>
                 </div>
-                <p><b>arianagrande</b> i am so pretty right?</p>
+                <p><b>{media.user.username}</b> {media.post.caption}</p>
                 <p className='view-all-comments'>View all 994 comments</p>
                 <div className='most-recent-comments'>
                     <p><b>twincarloss</b> yes baby, you are</p>

@@ -1,9 +1,17 @@
 import { csrfFetch } from "./csrf";
+const GET_POSTS_FROM_FOLLOWINGS = 'posts/GET_POSTS_FROM_FOLLOWINGS';
 const GET_ALL_POSTS_BY_USERID = 'posts/GET_ALL_POSTS_BY_USER_ID';
 const GET_POST_BY_ID = 'posts/GET_POST_BY_ID';
 const CREATE_POST = 'posts/CREATE_POST';
 const EDIT_POST = 'posts/EDIT_POST';
 const DELETE_POST = 'posts/DELETE_POST';
+
+const allPostsFromFollowings = (postList) => {
+    return {
+        type: GET_POSTS_FROM_FOLLOWINGS,
+        postList
+    }
+}
 
 const allPostsByUserId = (postList) => {
     return {
@@ -38,6 +46,13 @@ const deletePost = (postToDelete) => {
         type: DELETE_POST,
         postToDelete
     }
+}
+
+export const getAllPostsFromFollowings = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/posts/home/${id}`);
+    const postList = await response.json();
+    dispatch(allPostsFromFollowings(postList));
+    return postList;
 }
 
 export const getAllPostsByUserId = (userId) => async (dispatch) => {
@@ -107,6 +122,10 @@ const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_POSTS_FROM_FOLLOWINGS: {
+            const newState = { ...state, postList: action.postList };
+            return newState;
+        }
         case GET_ALL_POSTS_BY_USERID: {
             const newState = { ...state, postList: action.postList };
             return newState;

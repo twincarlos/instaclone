@@ -1,4 +1,24 @@
-const { Post } = require('./models');
+const { Post, Follow, User } = require('./models');
+
+async function postsFromFollowings(id) {
+    const followeesId= await Follow.findAll({ attributes: ['followeeId'], where: { followerId: id } });
+    const myFollowees = [];
+    for (let i = 0; i < followeesId.length; i++) {
+        const followee = await User.findByPk(followeesId[i].dataValues.followeeId);
+        myFollowees.push(followee.dataValues);
+    }
+    let allPosts = [];
+    for (let i = 0; i < myFollowees.length; i++) {
+        const posts = await Post.findAll({ where: { userId: myFollowees[i].id } });
+        for (let k = 0; k < posts.length; k++) {
+            const user = await User.findByPk(posts[k].userId);
+            allPosts.unshift({ user: user.dataValues, post: posts[k].dataValues });
+        }
+
+        // allPosts = [...allPosts, ...posts];
+    }
+    return allPosts;
+};
 
 async function postsByUserId(userId) {
     return await Post.findAll({ where: { userId } });
@@ -10,7 +30,6 @@ async function postById(id) {
 
 async function createPost(post) {
     const { userId, postImageUrl, caption } = post;
-    // console.log(`Frontend: ${post.userId}, ${post.postImageUrl}, ${post.caption}`);
 
     const newPost = await Post.create({
         userId,
@@ -35,4 +54,4 @@ async function deletePost(id) {
     return post;
 }
 
-module.exports = { postsByUserId, postById, createPost, editPost, deletePost };
+module.exports = { postsFromFollowings, postsByUserId, postById, createPost, editPost, deletePost };
