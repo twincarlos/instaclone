@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import './HomeContent.css';
 
@@ -13,9 +14,9 @@ function MediaWidget({ media }) {
         <div className='media-widget'>
             <div className='media-header'>
                 <div>
-                    <img src={media.user.profileImageUrl} alt=''></img>
+                    <NavLink to={`/users/${media.user.id}`}><img src={media.user.profileImageUrl} alt=''></img></NavLink>
                 </div>
-                <p>{media.user.username}</p>
+                <NavLink to={`/users/${media.user.id}`}><p>{media.user.username}</p></NavLink>
                 <i className="fas fa-ellipsis-h"></i>
             </div>
             <img src={media.post.postImageUrl} alt=''></img>
@@ -32,7 +33,10 @@ function MediaWidget({ media }) {
                     </div>
                     <p>Liked by <b>username</b> and <b>45,956 others</b></p>
                 </div>
-                <p><b>{media.user.username}</b> {media.post.caption}</p>
+                <div className='user-caption'>
+                    <NavLink to={`/users/${media.user.id}`}><p>{media.user.username}</p></NavLink>
+                    <p>hello</p>
+                </div>
                 <p className='view-all-comments'>View all 994 comments</p>
                 <div className='most-recent-comments'>
                     <p><b>twincarloss</b> yes baby, you are</p>

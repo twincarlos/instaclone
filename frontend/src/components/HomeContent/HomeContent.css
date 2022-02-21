@@ -28,7 +28,7 @@ div.media-widget > div.media-header > div {
     cursor: pointer;
 }
 
-div.media-widget > div.media-header > div > img {
+div.media-widget > div.media-header > div > a > img {
     width: 32px;
     height: 32px;
     margin-top: 2.5px;
@@ -37,7 +37,7 @@ div.media-widget > div.media-header > div > img {
     border: 3px solid white;
 }
 
-div.media-widget > div.media-header > p {
+div.media-widget > div.media-header > a > p {
     font-weight: 600;
     cursor: pointer;
     margin-right: 480px;
@@ -51,6 +51,16 @@ div.media-widget > div.interaction-section {
     margin-top: -6px;
     height: auto;
     border-bottom: 1px solid #EFEFEF;
+}
+
+div.media-widget > div.interaction-section > div.user-caption {
+    display: flex;
+    margin-left: 17px;
+}
+
+div.media-widget > div.interaction-section > div.user-caption > a {
+    font-weight: 600;
+    margin-right: 5px;
 }
 
 div.media-widget > div.interaction-section > div.icons-section > i {
