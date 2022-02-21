@@ -58,7 +58,7 @@ export const getAllTheirFollowers = (followeeId) => async dispatch => {
 }
 
 export const getAllMyFollowers = (followeeId) => async dispatch => {
-    const response = await csrfFetch(`/api/follos/myFollowers/${followeeId}`);
+    const response = await csrfFetch(`/api/follows/myFollowers/${followeeId}`);
 
     const myFollowers = await response.json();
     dispatch(getMyFollowers(myFollowers));
@@ -125,16 +125,28 @@ const followsReducer = (state = initialState, action) => {
         }
         case FOLLOW_USER: {
             const newFollower = action.newFollower;
-            state.myFollowings = [newFollower.follower, ...state.myFollowings];
+            state.myFollowings = [newFollower.followee, ...state.myFollowings];
+            if (newFollower.myFollower) {
+                state.theirFollowings = [newFollower.followee, ...state.theirFollowings];
+            }
             if (!(newFollower.myFollower || newFollower.thirdPartyFollower)) {
-                console.log('HERE!');
                 state.theirFollowers = [newFollower.follower, ...state.theirFollowers];
             }
             return { ...state };
         }
         case UNFOLLOW_USER: {
             const oldFollower = action.oldFollower;
-            state.myFollowings = state.myFollowings.filter((follower) => follower.id !== oldFollower.id);
+            state.myFollowings = state.myFollowings.filter((follower) => follower.id !== oldFollower.followee.id);
+            if (oldFollower.myFollower) {
+                state.theirFollowings = state.theirFollowings.filter((follower) => follower.id !== oldFollower.followee.id);
+            }
+            if (!oldFollower.myFollower && !oldFollower.thirdPartyFollower) {
+                state.theirFollowers = state.theirFollowers.filter((follower) => follower.id !== oldFollower.follower.id);
+            }
+            if (oldFollower.remove) {
+                state.theirFollowers = state.theirFollowers.filter((follower) => follower.id !== oldFollower.follower.id);
+                state.myFollowers = state.myFollowers.filter((follower) => follower.id !== oldFollower.follower.id);
+            }
             if (!oldFollower.thirdPartyFollower) state.theirFollowers = state.theirFollowers.filter((follower) => follower.id !== oldFollower.id);
             return { ...state };
         }

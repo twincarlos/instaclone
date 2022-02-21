@@ -59,16 +59,18 @@ router.post('/', async (req, res) => {
         followeeId
     });
     const follower = await User.findByPk(followerId);
-    return res.json({follower, myFollower, thirdPartyFollower});
+    const followee = await User.findByPk(followeeId);
+    return res.json({follower, followee, myFollower, thirdPartyFollower});
 });
 
 // Unfollow
 router.delete('/', async (req, res) => {
-    const { thirdPartyFollower, followerId, followeeId } = req.body;
+    const { remove, myFollower, thirdPartyFollower, followerId, followeeId } = req.body;
     const follow = await Follow.findOne({ where: [{ followerId }, {followeeId}]});
     await follow.destroy();
     const follower = await User.findByPk(followerId);
-    return res.json({follower, thirdPartyFollower});
+    const followee = await User.findByPk(followeeId);
+    return res.json({follower, followee, remove, myFollower, thirdPartyFollower});
 })
 
 module.exports = router;

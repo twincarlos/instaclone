@@ -7,7 +7,7 @@ import PostsGallery from '../PostsGallery';
 
 import { getOneUser } from '../../store/user';
 import { getAllPostsByUserId } from '../../store/post';
-import { getAllTheirFollowers, getAllTheirFollowings, getAllMyFollowings, followOneUser, unfollowOneUser } from '../../store/follow';
+import { getAllTheirFollowers, getAllTheirFollowings, getAllMyFollowings, followOneUser, unfollowOneUser, getAllMyFollowers } from '../../store/follow';
 
 import './UserPage.css';
 
@@ -18,7 +18,7 @@ function UserPage () {
     const user = useSelector(state => state.user.user?.user);
     const postList = useSelector(state => state.post.postList);
     const theirFollowers = useSelector(state => state.follow.theirFollowers);
-    // const myFollowers = useSelector(state => state.follow.myFollowers);
+    const myFollowers = useSelector(state => state.follow.myFollowers);
     const theirFollowings = useSelector(state => state.follow.theirFollowings);
     const myFollowings = useSelector(state => state.follow.myFollowings);
     const [showModal, setShowModal] = useState(false);
@@ -30,6 +30,7 @@ function UserPage () {
         dispatch(getAllTheirFollowers(userId));
         dispatch(getAllTheirFollowings(userId));
         if (sessionUser) dispatch(getAllMyFollowings(sessionUser.id));
+        if (sessionUser) dispatch(getAllMyFollowers(sessionUser.id));
     }, [dispatch, userId, sessionUser]);
 
     if (!user) return null;
@@ -128,7 +129,7 @@ function UserPage () {
                                                 {
                                                     (sessionUser?.id.toString() === userId) &&
                                                     (myFollowings?.find((following) => following.id === follower.id) ?
-                                                        <p onClick={() => dispatch(unfollowOneUser({ followerId: sessionUser.id, followeeId: follower.id }))} className='unfollow-p'><i className="fas fa-circle"></i>Unfollow</p>
+                                                        <p onClick={() => dispatch(unfollowOneUser({ myFollower: true, followerId: sessionUser.id, followeeId: follower.id }))} className='unfollow-p'><i className="fas fa-circle"></i>Unfollow</p>
                                                         :
                                                         <p onClick={() => dispatch(followOneUser({ myFollower: true, followerId: sessionUser.id, followeeId: follower.id }))} className='follow-p'><i className="fas fa-circle"></i>Follow</p>)
                                                 }
@@ -139,7 +140,7 @@ function UserPage () {
                                     <div id='right-follower'>
                                         {
                                             sessionUser?.id === Number(userId) ?
-                                                <button onClick={() => dispatch(unfollowOneUser({ followerId: follower.id, followeeId: sessionUser.id }))} className='remove-follower-button'>Remove</button>
+                                                <button onClick={() => dispatch(unfollowOneUser({ remove: true, followerId: follower.id, followeeId: sessionUser.id }))} className='remove-follower-button'>Remove</button>
                                                 :
                                                 (
                                                     sessionUser?.id === follower.id ? null :
