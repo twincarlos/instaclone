@@ -252,13 +252,59 @@ div#followers-modal > ul > li > div#left-follower > a > img {
 }
 
 div#followers-modal > ul > li > div#left-follower > span {
-    line-height: 1px;
+    line-height: 3px;
     margin-top: 17px;
     margin-left: 10px;
+    position: relative;
+    bottom: 10px;
 }
 
-div#followers-modal > ul > li > div#left-follower > span > a {
+div#followers-modal > ul > li > div#left-follower > span > p {
+    color: #8E8E8E
+}
+
+div#followers-modal > ul > li > div#left-follower > span > span {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    margin-bottom: -15px;
+}
+
+div#followers-modal > ul > li > div#left-follower > span > span > a {
     font-weight: 600;
+}
+
+div#followers-modal > ul > li > div#left-follower > span > span > p.follow-p {
+    display: flex;
+    font-size: 12px;
+    font-weight: 600;
+    color: #0095F6;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+div#followers-modal > ul > li > div#left-follower > span > span > p.unfollow-p {
+    display: flex;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8E8E8E;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+div#followers-modal > ul > li > div#left-follower > span > span > p > i {
+    font-size: 2px;
+    margin-right: 5px;
+}
+
+div#followers-modal > ul > li > div#right-follower > button.remove-follower-button {
+    width: 70px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 div#followers-modal > ul > li > div#right-follower > button.follow-follower-button {
