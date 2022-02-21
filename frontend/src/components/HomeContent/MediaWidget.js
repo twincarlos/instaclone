@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { Modal } from '../../context/Modal';
+import MediaModal from '../MediaModal';
+
 import './HomeContent.css';
 
 function MediaWidget({ media }) {
     const [input, setInput] = useState('');
+    const [showMainModal, setShowMainModal] = useState(false);
 
     const POSTS = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
                 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg',
@@ -23,7 +27,7 @@ function MediaWidget({ media }) {
             <div className='interaction-section'>
                 <div className='icons-section'>
                     <i className="far fa-heart"></i>
-                    <i className="far fa-comment"></i>
+                    <i className="far fa-comment" onClick={() => setShowMainModal(true)}></i>
                     <i className="far fa-paper-plane"></i>
                     <i className="far fa-bookmark"></i>
                 </div>
@@ -35,7 +39,7 @@ function MediaWidget({ media }) {
                 </div>
                 <div className='user-caption'>
                     <NavLink to={`/users/${media.user.id}`}><p>{media.user.username}</p></NavLink>
-                    <p>hello</p>
+                    <p>{media.post.caption}</p>
                 </div>
                 <p className='view-all-comments'>View all 994 comments</p>
                 <div className='most-recent-comments'>
@@ -51,6 +55,13 @@ function MediaWidget({ media }) {
                     <button type='submit' disabled={!input.length} className={input.length ? 'can-comment' : null}>Post</button>
                 </form>
             </div>
+            {
+                showMainModal && (
+                    <Modal onClose={() => setShowMainModal(false)}>
+                        <MediaModal post={media.post} owner={media.user} setShowMainModal={setShowMainModal}/>
+                    </Modal>
+                )
+            }
         </div>
     );
 }

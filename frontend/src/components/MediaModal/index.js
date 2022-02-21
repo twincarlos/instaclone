@@ -43,7 +43,7 @@ function MediaModal({ post, owner, setShowMainModal }) {
                             <NavLink to={`/users/${owner.id}`}><img src={owner.profileImageUrl} alt=''></img></NavLink>
                         </div>
                         <span>
-                            <NavLink to={`/users/${owner.id}`}>{owner.username}</NavLink>{((sessionUser?.id !== owner.id) && (<><i className="fas fa-circle"></i><button>Follow</button></>))}<i className="fas fa-ellipsis-h" onClick={() => setShowModal(true)}></i>
+                            <NavLink to={`/users/${owner.id}`}>{owner.username}</NavLink>{( (sessionUser?.id !== owner.id) && (<><i className="fas fa-circle"></i><button>Follow</button></>) )}<i className="fas fa-ellipsis-h" onClick={() => setShowModal(true)}></i>
                         </span>
                     </li>
                     <ul className='all-user-comments'>
