@@ -271,6 +271,15 @@ div#followers-modal > ul > li > div#left-follower > span > span {
     margin-bottom: -15px;
 }
 
+div#followers-modal > ul > li > div#left-follower > span > span.not-my-ig {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    margin-bottom: -15px;
+    line-height: 22px;
+}
+
 div#followers-modal > ul > li > div#left-follower > span > span > a {
     font-weight: 600;
 }
