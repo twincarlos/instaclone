@@ -15,6 +15,30 @@ router.get('/followers/:followeeId', async (req, res) => {
     return res.json(followers);
 });
 
+// Their Followings
+router.get('/theirFollowings/:followerId', async (req, res) => {
+    const followerId = req.params.followerId;
+    const followeesId = await Follow.findAll({ attributes: ['followeeId'], where: { followerId } });
+    const theirFollowings = [];
+    for (let i = 0; i < followeesId.length; i++) {
+        const followee = await User.findByPk(followeesId[i].dataValues.followeeId);
+        theirFollowings.push(followee.dataValues);
+    }
+    return res.json(theirFollowings);
+});
+
+// My Followings
+router.get('/myFollowings/:followerId', async (req, res) => {
+    const followerId = req.params.followerId;
+    const followeesId = await Follow.findAll({ attributes: ['followeeId'], where: { followerId } });
+    const myFollowings = [];
+    for (let i = 0; i < followeesId.length; i++) {
+        const followee = await User.findByPk(followeesId[i].dataValues.followeeId);
+        myFollowings.push(followee.dataValues);
+    }
+    return res.json(myFollowings);
+});
+
 // Follow
 router.post('/', async (req, res) => {
     const { followerId, followeeId } = req.body;

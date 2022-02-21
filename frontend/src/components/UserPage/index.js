@@ -7,7 +7,7 @@ import PostsGallery from '../PostsGallery';
 
 import { getOneUser } from '../../store/user';
 import { getAllPostsByUserId } from '../../store/post';
-import { getFollowers, followOneUser, unfollowOneUser } from '../../store/follow';
+import { getFollowers, getAllTheirFollowings, getAllMyFollowings, followOneUser, unfollowOneUser } from '../../store/follow';
 
 import './UserPage.css';
 
@@ -18,13 +18,18 @@ function UserPage () {
     const user = useSelector(state => state.user.user?.user);
     const postList = useSelector(state => state.post.postList);
     const followers = useSelector(state => state.follow.followers);
+    const theirFollowings = useSelector(state => state.follow.theirFollowings);
+    const myFollowings = useSelector(state => state.follow.myFollowings);
     const [showModal, setShowModal] = useState(false);
+    const [showFollowers, setShowFollowers] = useState(false);
 
     useEffect(() => {
         dispatch(getOneUser(userId));
         dispatch(getAllPostsByUserId(userId));
         dispatch(getFollowers(userId));
-    }, [dispatch, userId]);
+        dispatch(getAllTheirFollowings(userId));
+        if (sessionUser) dispatch(getAllMyFollowings(sessionUser.id));
+    }, [dispatch, userId, sessionUser]);
 
     if (!user) return null;
 
@@ -70,7 +75,7 @@ function UserPage () {
                     </div>
                     <div id='user-header-middle'>
                         <p><b>{postList?.length}</b> posts</p>
-                        <p id='followers-number'><b>{followers?.length}</b> followers</p>
+                        <p id='followers-number' onClick={() => setShowFollowers(true)}><b>{followers?.length}</b> followers</p>
                         <p id='following-number'><b>958</b> following</p>
                     </div>
                     <div id='user-header-bottom'>
@@ -100,6 +105,37 @@ function UserPage () {
                                 <button id='unfollow-button-modal' onClick={handleUnfollow}>Unfollow</button>
                                 <button onClick={() => setShowModal(false)}>Cancel</button>
                             </span>
+                        </div>
+                    </Modal>
+                )
+            }
+            {
+                showFollowers && (
+                    <Modal onClose={() => setShowFollowers(false)}>
+                        <div id='followers-modal'>
+                            <span>
+                                <p>Followers</p>
+                                <i className="fas fa-times" onClick={() => setShowFollowers(false)}></i>
+                            </span>
+                            <ul>
+                                { followers.map((follower) => <li key={follower.id.toString()}>
+                                    <div id='left-follower'>
+                                        <NavLink to={`/users/${follower.id}`}><img src={follower.profileImageUrl} alt=''></img></NavLink>
+                                        <span>
+                                            <NavLink to={`/users/${follower.id}`}>{follower.username}</NavLink>
+                                            <p>{follower.username}</p>
+                                        </span>
+                                    </div>
+                                    <div id='right-follower'>
+                                        {
+                                            myFollowings?.find((following) => following.id === follower.id) ?
+                                                <button className='unfollow-follower-button'>Unfollow</button>
+                                                :
+                                                <button className='follow-follower-button'>Follow</button>
+                                        }
+                                    </div>
+                                </li>) }
+                            </ul>
                         </div>
                     </Modal>
                 )
