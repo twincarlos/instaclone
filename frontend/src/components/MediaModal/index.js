@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal } from '../../context/Modal';
+import { getAllMyFollowings } from '../../store/follow';
 import { editOnePost, deleteOnePost } from '../../store/post';
 
 import './MediaModal.css';
@@ -12,8 +13,13 @@ function MediaModal({ post, owner, setShowMainModal }) {
     const [showDelete, setShowDelete] = useState(false);
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    const myFollowings = useSelector(state => state.follow.myFollowings);
     const [input, setInput] = useState('');
     const [caption, setCaption] = useState(post?.caption);
+
+    useEffect(() => {
+        if (sessionUser) dispatch(getAllMyFollowings(sessionUser.id));
+    }, [dispatch, sessionUser]);
 
     const bubbles = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg', 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg', 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg']
 
@@ -43,7 +49,7 @@ function MediaModal({ post, owner, setShowMainModal }) {
                             <NavLink to={`/users/${owner.id}`}><img src={owner.profileImageUrl} alt=''></img></NavLink>
                         </div>
                         <span>
-                            <NavLink to={`/users/${owner.id}`}>{owner.username}</NavLink>{( (sessionUser?.id !== owner.id) && (<><i className="fas fa-circle"></i><button>Follow</button></>) )}<i className="fas fa-ellipsis-h" onClick={() => setShowModal(true)}></i>
+                            <NavLink to={`/users/${owner.id}`}>{owner.username}</NavLink>{( (sessionUser?.id !== owner.id) && ( myFollowings?.find((follower) => follower.id === owner.id) ? null : (<><i className="fas fa-circle"></i><button>Follow</button></>)) )}<i className="fas fa-ellipsis-h" onClick={() => setShowModal(true)}></i>
                         </span>
                     </li>
                     <ul className='all-user-comments'>
