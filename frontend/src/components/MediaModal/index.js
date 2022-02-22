@@ -72,7 +72,7 @@ function MediaModal({ post, owner, setShowMainModal }) {
                         </div>
                         <div className='who-has-liked'>
                             <div>
-                                { bubbles.map((bubble, idx) => (idx < 3) && (<div className={`user-like-bubble bubble${idx.toString()}`} key={idx.toString()}><img src={bubble} alt=''></img></div>)) }
+                                { likes?.map((like, idx) => (like && idx < 3) ? (<div className={`user-like-bubble bubble${idx.toString()}`} key={like.id.toString()}><img src={like.profileImageUrl} alt=''></img></div>) : null) }
                                 <p>Liked by <NavLink to='/users/1'>username</NavLink> and <b>6,245,252 others</b></p>
                             </div>
                         </div>
