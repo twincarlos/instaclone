@@ -72,7 +72,7 @@ const likesReducer = (state = initialState, action) => {
         }
         case UNLIKE: {
             const oldLiker = action.oldLiker;
-            state.likes.filet((liker) => liker.id !== oldLiker.id);
+            state.likes = state.likes.filter((liker) => liker.id !== oldLiker.id);
             return { ...state };
         }
         default:

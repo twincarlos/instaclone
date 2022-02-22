@@ -238,6 +238,10 @@
     cursor: pointer;
 }
 
+div.interaction-icons > i.liked {
+    color: rgb(237, 73, 86);
+}
+
 .user-input-section > div.interaction-icons {
     font-size: 28px;
     width: 100%;
