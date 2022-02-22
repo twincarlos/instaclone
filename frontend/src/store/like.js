@@ -66,12 +66,12 @@ const likesReducer = (state = initialState, action) => {
             return { ...state, likes: action.likes };
         }
         case LIKE: {
-            const newLiker = action.newLiker;
+            const newLiker = action.newLiker.user;
             state.likes = [newLiker, ...state.likes];
             return { ...state };
         }
         case UNLIKE: {
-            const oldLiker = action.oldLiker;
+            const oldLiker = action.oldLiker.user;
             state.likes = state.likes.filter((liker) => liker.id !== oldLiker.id);
             return { ...state };
         }

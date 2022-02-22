@@ -1,12 +1,17 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { Modal } from '../../context/Modal';
 import MediaModal from '../MediaModal';
+import { likeOneHomePost, unlikeOneHomePost } from '../../store/post';
 
 import './HomeContent.css';
 
-function MediaWidget({ media }) {
+function MediaWidget({ media, idx }) {
+    const dispatch = useDispatch();
+    const sessionUser = useSelector((state) => state.session.user);
+    const likes = useSelector((state) => state.post.homeList[idx].likes)
     const [input, setInput] = useState('');
     const [showMainModal, setShowMainModal] = useState(false);
 
@@ -26,7 +31,11 @@ function MediaWidget({ media }) {
             <img src={media.post.postImageUrl} alt=''></img>
             <div className='interaction-section'>
                 <div className='icons-section'>
-                    <i className="far fa-heart"></i>
+                    { (likes.find((like) => like.id === sessionUser.id) ?
+                            <i onClick={() => dispatch(unlikeOneHomePost({ postId: media.post.id, userId: sessionUser.id }))} className="fas fa-heart liked"></i>
+                            :
+                            <i onClick={() => dispatch(likeOneHomePost({ postId: media.post.id, userId: sessionUser.id }))} className="far fa-heart"></i>)
+                     }
                     <i className="far fa-comment" onClick={() => setShowMainModal(true)}></i>
                     <i className="far fa-paper-plane"></i>
                     <i className="far fa-bookmark"></i>

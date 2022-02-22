@@ -70,6 +70,10 @@ div.media-widget > div.interaction-section > div.icons-section > i {
     cursor: pointer;
 }
 
+div.media-widget > div.interaction-section > div.icons-section > i.liked {
+    color: rgb(237, 73, 86);
+}
+
 div.media-widget > div.interaction-section > div.icons-section > i.fa-paper-plane {
     margin-right: 460px;
 }

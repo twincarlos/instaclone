@@ -1,4 +1,4 @@
-const { Post, Follow, User } = require('./models');
+const { Post, Follow, User, Like } = require('./models');
 
 async function postsFromFollowings(id) {
     const followeesId= await Follow.findAll({ attributes: ['followeeId'], where: { followerId: id } });
@@ -12,10 +12,14 @@ async function postsFromFollowings(id) {
         const posts = await Post.findAll({ where: { userId: myFollowees[i].id } });
         for (let k = 0; k < posts.length; k++) {
             const user = await User.findByPk(posts[k].userId);
-            allPosts.unshift({ user: user.dataValues, post: posts[k].dataValues });
+            const likes = [];
+            const likesId = await Like.findAll({ where: { postId: posts[k].dataValues.id } });
+            for (let j = 0; j < likesId.length; j++) {
+                const liker = await User.findByPk(likesId[j].userId);
+                likes.unshift(liker.dataValues);
+            }
+            allPosts.unshift({ user: user.dataValues, post: posts[k].dataValues, likes });
         }
-
-        // allPosts = [...allPosts, ...posts];
     }
     return allPosts;
 };

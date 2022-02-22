@@ -24,8 +24,6 @@ function MediaModal({ post, owner, setShowMainModal }) {
         dispatch(getAllLikesFromPost(post.id));
     }, [dispatch, sessionUser, post.id]);
 
-    const bubbles = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg', 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg', 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg']
-
     if (!post) return null;
 
     const handleEdit = (e) => {
@@ -71,10 +69,10 @@ function MediaModal({ post, owner, setShowMainModal }) {
                             <i className="far fa-bookmark"></i>
                         </div>
                         <div className='who-has-liked'>
-                            <div>
+                            { likes?.length ? <div>
                                 { likes?.map((like, idx) => (like && idx < 3) ? (<div className={`user-like-bubble bubble${idx.toString()}`} key={like.id.toString()}><img src={like.profileImageUrl} alt=''></img></div>) : null) }
                                 <p>Liked by <NavLink to={`/users/${likes[0].id}`}>{likes[0].username}</NavLink>{ (likes.length > 1) ? ` and ${likes.length - 1} others` : null }</p>
-                            </div>
+                            </div> : null }
                         </div>
                         <div className='time-posted'>
                             <p>3 DAYS AGO</p>

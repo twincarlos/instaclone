@@ -5,6 +5,8 @@ const GET_POST_BY_ID = 'posts/GET_POST_BY_ID';
 const CREATE_POST = 'posts/CREATE_POST';
 const EDIT_POST = 'posts/EDIT_POST';
 const DELETE_POST = 'posts/DELETE_POST';
+const LIKE_A_HOME_POST = 'posts/LIKE_A_HOME_POST';
+const UNLIKE_A_HOME_POST = 'posts/UNLIKE_A_HOME_POST';
 
 const allPostsFromFollowings = (homeList) => {
     return {
@@ -45,6 +47,20 @@ const deletePost = (postToDelete) => {
     return {
         type: DELETE_POST,
         postToDelete
+    }
+}
+
+const likeAHomePost = (newLiker) => {
+    return {
+        type: LIKE_A_HOME_POST,
+        newLiker
+    }
+}
+
+const unlikeAHomePost = (oldLiker) => {
+    return {
+        type: UNLIKE_A_HOME_POST,
+        oldLiker
     }
 }
 
@@ -118,6 +134,31 @@ export const deleteOnePost = (id) => async (dispatch) => {
     return postToDelete;
 }
 
+export const likeOneHomePost = (liker) => async dispatch => {
+    const response = await csrfFetch('/api/likes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(liker)
+    });
+
+    const newLiker = await response.json();
+    dispatch(likeAHomePost(newLiker));
+    return newLiker;
+}
+
+export const unlikeOneHomePost = (unliker) => async dispatch => {
+    const response = await csrfFetch('/api/likes', {
+        method: 'DELETE',
+        body: JSON.stringify(unliker)
+    });
+
+    const oldLiker = await response.json();
+    dispatch(unlikeAHomePost(oldLiker));
+    return oldLiker;
+}
+
 const initialState = {};
 
 const postsReducer = (state = initialState, action) => {
@@ -151,6 +192,18 @@ const postsReducer = (state = initialState, action) => {
             state.postList = state.postList.filter((post) => post.id !== postToDelete.id);
             const newState = { ...state };
             return newState;
+        }
+        case LIKE_A_HOME_POST: {
+            const newLiker = action.newLiker.user;
+            const postId = action.newLiker.like.postId;
+            state.homeList = state.homeList.map((post) => (post.post.id === postId) ? { user: post.user, post: post.post, likes: [newLiker, ...post.likes] } : post);
+            return { ...state };
+        }
+        case UNLIKE_A_HOME_POST: {
+            const oldLiker = action.oldLiker.user;
+            const postId = action.oldLiker.like.postId;
+            state.homeList = state.homeList.map((post) => (post.post.id === postId) ? { user: post.user, post: post.post, likes: post.likes.filter((liker) => liker.id !== oldLiker.id) } : post);
+            return { ...state };
         }
         default:
             return state;

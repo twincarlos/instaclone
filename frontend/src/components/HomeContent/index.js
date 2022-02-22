@@ -24,7 +24,7 @@ function HomeContent() {
 
     return (
         <div>
-            { homeList.map((post) => <MediaWidget key={post.post.id.toString()} media={post} />) }
+            { homeList.map((post, idx) => <MediaWidget key={post.post.id.toString()} media={post} idx={idx} />) }
         </div>
     );
 }

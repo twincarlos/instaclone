@@ -18,9 +18,9 @@ router.get('/:postId', async (req, res) => {
 // Like
 router.post('/', async (req, res) => {
     const { postId, userId } = req.body;
-    await Like.create({ postId, userId });
+    const like = await Like.create({ postId, userId });
     const user = await User.findByPk(userId);
-    return res.json(user);
+    return res.json({ user, like });
 });
 
 // Dislike
@@ -29,7 +29,7 @@ router.delete('/', async (req, res) => {
     const like = await Like.findOne({ where: [{ postId }, {userId}]});
     await like.destroy();
     const user = await User.findByPk(userId);
-    return res.json(user);
+    return res.json({ user, like });
 });
 
 module.exports = router;
