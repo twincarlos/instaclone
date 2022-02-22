@@ -73,7 +73,7 @@ function MediaModal({ post, owner, setShowMainModal }) {
                         <div className='who-has-liked'>
                             <div>
                                 { likes?.map((like, idx) => (like && idx < 3) ? (<div className={`user-like-bubble bubble${idx.toString()}`} key={like.id.toString()}><img src={like.profileImageUrl} alt=''></img></div>) : null) }
-                                <p>Liked by <NavLink to='/users/1'>username</NavLink> and <b>6,245,252 others</b></p>
+                                <p>Liked by <NavLink to={`/users/${likes[0].id}`}>{likes[0].username}</NavLink>{ (likes.length > 1) ? ` and ${likes.length - 1} others` : null }</p>
                             </div>
                         </div>
                         <div className='time-posted'>
