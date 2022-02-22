@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Modal } from '../../context/Modal';
 import { getAllMyFollowings } from '../../store/follow';
 import { editOnePost, deleteOnePost } from '../../store/post';
+import { getAllLikesFromPost, likeAPost, unlikeAPost } from '../../store/like';
 
 import './MediaModal.css';
 
@@ -14,12 +15,14 @@ function MediaModal({ post, owner, setShowMainModal }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const myFollowings = useSelector(state => state.follow.myFollowings);
+    const likes = useSelector(state => state.like.likes);
     const [input, setInput] = useState('');
     const [caption, setCaption] = useState(post?.caption);
 
     useEffect(() => {
         if (sessionUser) dispatch(getAllMyFollowings(sessionUser.id));
-    }, [dispatch, sessionUser]);
+        dispatch(getAllLikesFromPost(post.id));
+    }, [dispatch, sessionUser, post.id]);
 
     const bubbles = ['https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg', 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg', 'https://routenote.com/blog/wp-content/uploads/2022/01/243283253_580988179688935_8877892167513690479_n.jpg']
 
@@ -57,7 +60,7 @@ function MediaModal({ post, owner, setShowMainModal }) {
                     </ul>
                     <li className='user-input-section'>
                         <div className='interaction-icons'>
-                            <i className="far fa-heart"></i>
+                            <i onClick={() => dispatch(likeAPost({ postId: post.id, userId: sessionUser.id }))} className="far fa-heart"></i>
                             <i className="far fa-comment"></i>
                             <i className="far fa-paper-plane"></i>
                             <i className="far fa-bookmark"></i>

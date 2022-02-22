@@ -4,6 +4,7 @@ import sessionReducer from './session';
 import user from './user';
 import post from './post';
 import follow from './follow';
+import like from './like';
 
 let enhancer;
 
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   user,
   post,
-  follow
+  follow,
+  like
 });
 
 export default configureStore;
