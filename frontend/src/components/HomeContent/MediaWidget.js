@@ -67,7 +67,7 @@ function MediaWidget({ media, idx }) {
             {
                 showMainModal && (
                     <Modal onClose={() => setShowMainModal(false)}>
-                        <MediaModal post={media.post} owner={media.user} setShowMainModal={setShowMainModal}/>
+                        <MediaModal post={media.post} owner={media.user} setShowMainModal={setShowMainModal} idx={idx}/>
                     </Modal>
                 )
             }

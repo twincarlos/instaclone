@@ -8,16 +8,19 @@ import { getAllLikesFromPost, likeAPost, unlikeAPost } from '../../store/like';
 
 import './MediaModal.css';
 
-function MediaModal({ post, owner, setShowMainModal }) {
+function MediaModal({ post, owner, setShowMainModal, idx }) {
     const [showModal, setShowModal] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const myFollowings = useSelector(state => state.follow.myFollowings);
-    const likes = useSelector(state => state.like.likes);
+    let homeLikes = useSelector(state => state.post.homeList);
+    let likes = useSelector(state => state.like.likes);
     const [input, setInput] = useState('');
     const [caption, setCaption] = useState(post?.caption);
+
+    if (homeLikes) likes = homeLikes[idx].likes;
 
     useEffect(() => {
         if (sessionUser) dispatch(getAllMyFollowings(sessionUser.id));
