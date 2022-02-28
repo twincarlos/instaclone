@@ -62,7 +62,7 @@ function MediaModal({ post, setShowMainModal, idx }) {
                     <li className='user-input-section'>
                         <div className='interaction-icons'>
                             {
-                                post.likes.find((like) => like.userId === sessionUser.id) ?
+                                post.likes.find((like) => like.id === sessionUser.id) ?
                                     <i onClick={() => { dispatch(unlikeOnePost({ postId: post.post.id, userId: sessionUser.id }))}} className="fas fa-heart liked"></i>
                                     :
                                     <i onClick={() => { dispatch(likeOnePost({ postId: post.post.id, userId: sessionUser.id }))}} className="far fa-heart"></i>
