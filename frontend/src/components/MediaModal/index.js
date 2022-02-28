@@ -4,27 +4,21 @@ import { useState, useEffect } from 'react';
 import { Modal } from '../../context/Modal';
 import { getAllMyFollowings } from '../../store/follow';
 import { editOnePost, deleteOnePost, likeOnePost, unlikeOnePost } from '../../store/post';
-// import { getAllLikesFromPost, likeAPost, unlikeAPost } from '../../store/like';
 
 import './MediaModal.css';
 
-function MediaModal({ post, setShowMainModal, idx }) {
+function MediaModal({ post, setShowMainModal }) {
     const [showModal, setShowModal] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const myFollowings = useSelector(state => state.follow.myFollowings);
-    // let homeLikes = useSelector(state => state.post.homeList);
-    // let likes = useSelector(state => state.like.likes);
     const [input, setInput] = useState('');
     const [caption, setCaption] = useState(post.post.caption);
 
-    // if (homeLikes) likes = homeLikes[idx].likes;
-
     useEffect(() => {
         if (sessionUser) dispatch(getAllMyFollowings(sessionUser.id));
-        // dispatch(getAllLikesFromPost(post.id));
     }, [dispatch, sessionUser]);
 
     if (!post) return null;
