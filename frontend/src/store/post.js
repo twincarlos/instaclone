@@ -5,13 +5,13 @@ const GET_POST_BY_ID = 'posts/GET_POST_BY_ID';
 const CREATE_POST = 'posts/CREATE_POST';
 const EDIT_POST = 'posts/EDIT_POST';
 const DELETE_POST = 'posts/DELETE_POST';
-const LIKE_A_HOME_POST = 'posts/LIKE_A_HOME_POST';
-const UNLIKE_A_HOME_POST = 'posts/UNLIKE_A_HOME_POST';
+const LIKE_A_POST = 'posts/LIKE_A_POST';
+const UNLIKE_A_POST = 'posts/UNLIKE_A_POST';
 
-const allPostsFromFollowings = (homeList) => {
+const allPostsFromFollowings = (postList) => {
     return {
         type: GET_POSTS_FROM_FOLLOWINGS,
-        homeList
+        postList
     }
 }
 
@@ -50,25 +50,25 @@ const deletePost = (postToDelete) => {
     }
 }
 
-const likeAHomePost = (newLiker) => {
+const likeAPost = (newLiker) => {
     return {
-        type: LIKE_A_HOME_POST,
+        type: LIKE_A_POST,
         newLiker
     }
 }
 
-const unlikeAHomePost = (oldLiker) => {
+const unlikeAPost = (oldLiker) => {
     return {
-        type: UNLIKE_A_HOME_POST,
+        type: UNLIKE_A_POST,
         oldLiker
     }
 }
 
 export const getAllPostsFromFollowings = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/posts/home/${id}`);
-    const homeList = await response.json();
-    dispatch(allPostsFromFollowings(homeList));
-    return homeList;
+    const postList = await response.json();
+    dispatch(allPostsFromFollowings(postList));
+    return postList;
 }
 
 export const getAllPostsByUserId = (userId) => async (dispatch) => {
@@ -134,7 +134,7 @@ export const deleteOnePost = (id) => async (dispatch) => {
     return postToDelete;
 }
 
-export const likeOneHomePost = (liker) => async dispatch => {
+export const likeOnePost = (liker) => async dispatch => {
     const response = await csrfFetch('/api/likes', {
         method: 'POST',
         headers: {
@@ -144,18 +144,18 @@ export const likeOneHomePost = (liker) => async dispatch => {
     });
 
     const newLiker = await response.json();
-    dispatch(likeAHomePost(newLiker));
+    dispatch(likeAPost(newLiker));
     return newLiker;
 }
 
-export const unlikeOneHomePost = (unliker) => async dispatch => {
+export const unlikeOnePost = (unliker) => async dispatch => {
     const response = await csrfFetch('/api/likes', {
         method: 'DELETE',
         body: JSON.stringify(unliker)
     });
 
     const oldLiker = await response.json();
-    dispatch(unlikeAHomePost(oldLiker));
+    dispatch(unlikeAPost(oldLiker));
     return oldLiker;
 }
 
@@ -164,7 +164,7 @@ const initialState = {};
 const postsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_POSTS_FROM_FOLLOWINGS: {
-            const newState = { ...state, homeList: action.homeList };
+            const newState = { ...state, postList: action.postList };
             return newState;
         }
         case GET_ALL_POSTS_BY_USERID: {
@@ -193,16 +193,16 @@ const postsReducer = (state = initialState, action) => {
             const newState = { ...state };
             return newState;
         }
-        case LIKE_A_HOME_POST: {
+        case LIKE_A_POST: {
             const newLiker = action.newLiker.user;
             const postId = action.newLiker.like.postId;
-            state.homeList = state.homeList.map((post) => (post.post.id === postId) ? { user: post.user, post: post.post, likes: [newLiker, ...post.likes] } : post);
+            state.postList = state.postList.map((post) => (post.post.id === postId) ? { user: post.user, post: post.post, likes: [newLiker, ...post.likes] } : post);
             return { ...state };
         }
-        case UNLIKE_A_HOME_POST: {
+        case UNLIKE_A_POST: {
             const oldLiker = action.oldLiker.user;
             const postId = action.oldLiker.like.postId;
-            state.homeList = state.homeList.map((post) => (post.post.id === postId) ? { user: post.user, post: post.post, likes: post.likes.filter((liker) => liker.id !== oldLiker.id) } : post);
+            state.postList = state.postList.map((post) => (post.post.id === postId) ? { user: post.user, post: post.post, likes: post.likes.filter((liker) => liker.id !== oldLiker.id) } : post);
             return { ...state };
         }
         default:

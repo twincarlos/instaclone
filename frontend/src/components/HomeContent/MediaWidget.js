@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom';
 
 import { Modal } from '../../context/Modal';
 import MediaModal from '../MediaModal';
-import { likeOneHomePost, unlikeOneHomePost } from '../../store/post';
+import { likeOnePost, unlikeOnePost } from '../../store/post';
 
 import './HomeContent.css';
 
 function MediaWidget({ media, idx }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    const likes = useSelector((state) => state.post.homeList[idx].likes)
+    // const likes = useSelector((state) => state.post.homeList[idx].likes);
     const [input, setInput] = useState('');
     const [showMainModal, setShowMainModal] = useState(false);
 
@@ -31,10 +31,11 @@ function MediaWidget({ media, idx }) {
             <img src={media.post.postImageUrl} alt=''></img>
             <div className='interaction-section'>
                 <div className='icons-section'>
-                    { (likes.find((like) => like.id === sessionUser.id) ?
-                            <i onClick={() => dispatch(unlikeOneHomePost({ postId: media.post.id, userId: sessionUser.id }))} className="fas fa-heart liked"></i>
+                    {/* {console.log(idx, media.likes, (media.likes.find((like) => like.id === sessionUser.id)))} */}
+                    { (media.likes.find((like) => like.id === sessionUser.id) ?
+                        <i onClick={() => dispatch(unlikeOnePost({ postId: media.post.id, userId: sessionUser.id }))} className="fas fa-heart liked"></i>
                             :
-                            <i onClick={() => dispatch(likeOneHomePost({ postId: media.post.id, userId: sessionUser.id }))} className="far fa-heart"></i>)
+                        <i onClick={() => dispatch(likeOnePost({ postId: media.post.id, userId: sessionUser.id }))} className="far fa-heart"></i>)
                      }
                     <i className="far fa-comment" onClick={() => setShowMainModal(true)}></i>
                     <i className="far fa-paper-plane"></i>
@@ -67,7 +68,7 @@ function MediaWidget({ media, idx }) {
             {
                 showMainModal && (
                     <Modal onClose={() => setShowMainModal(false)}>
-                        <MediaModal post={media.post} owner={media.user} setShowMainModal={setShowMainModal} idx={idx}/>
+                        <MediaModal post={media} setShowMainModal={setShowMainModal} idx={idx}/>
                     </Modal>
                 )
             }

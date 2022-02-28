@@ -14,17 +14,17 @@ import './HomeContent.css'
 function HomeContent() {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    const homeList = useSelector(state => state.post.homeList);
+    const postList = useSelector(state => state.post.postList);
 
     useEffect(() => {
         dispatch(getAllPostsFromFollowings(sessionUser.id));
     }, [dispatch, sessionUser.id]);
 
-    if (!homeList) return null;
+    if (!postList) return null;
 
     return (
         <div>
-            { homeList.map((post, idx) => <MediaWidget key={post.post.id.toString()} media={post} idx={idx} />) }
+            { postList.map((post, idx) => <MediaWidget key={post.post.id.toString()} media={post} idx={idx} />) }
         </div>
     );
 }

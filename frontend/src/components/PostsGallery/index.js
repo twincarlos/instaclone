@@ -2,12 +2,12 @@ import Post from './Post';
 
 import './PostsGallery.css';
 
-function PostsGallery({ postList, owner }) {
+function PostsGallery({ postList }) {
     if (!postList) return null;
 
     return (
         <div id='posts-gallery'>
-            { postList.map((post) => <Post key={(post.id).toString()} post={post} owner={owner}/>) }
+            { postList.map((post) => <Post key={(post.post.id).toString()} post={post}/>) }
         </div>
     );
 }

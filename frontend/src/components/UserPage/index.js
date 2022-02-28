@@ -18,7 +18,7 @@ function UserPage () {
     const user = useSelector(state => state.user.user?.user);
     const postList = useSelector(state => state.post.postList);
     const theirFollowers = useSelector(state => state.follow.theirFollowers);
-    const myFollowers = useSelector(state => state.follow.myFollowers);
+    // const myFollowers = useSelector(state => state.follow.myFollowers);
     const theirFollowings = useSelector(state => state.follow.theirFollowings);
     const myFollowings = useSelector(state => state.follow.myFollowings);
     const [showModal, setShowModal] = useState(false);
@@ -95,7 +95,7 @@ function UserPage () {
                 <NavLink to={`/users/${userId}`}><i className="fas fa-user-tag"></i> TAGGED</NavLink>
             </ul>
             <div id='posts-gallery'>
-                <PostsGallery postList={postList} owner={user}/>
+                <PostsGallery postList={postList}/>
             </div>
             {
                 showModal && (
